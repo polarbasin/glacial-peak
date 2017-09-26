@@ -7,6 +7,7 @@ const session = require('express-session');
 const handlers = require('./handlers');
 const rss = require('./rss.js');
 const fbAuth = require('./config/facebook_passport');
+const socket = require('socket.io');
 require('dotenv').config();
 require('./dbConnect');
 require('./config/passport')(passport);
@@ -64,6 +65,22 @@ const feed = 'http://www.bestofneworleans.com/gambit/Rss.xml?section=1222783';
 rss.requestRSS(feed);
 // rss.request();
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
+
+// Socket
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('made socket connection');
+  console.log('socket', socket.id);
+
+  socket.on('chat', (data) => {
+    io.sockets.emit('chat', data);
+  });
+
+  socket.on('typing', (data) => {
+    socket.broadcast.emit('typing', data);
+  });
+})
