@@ -18,7 +18,7 @@ btn.addEventListener('click', () => {
 
 message.addEventListener('keypress', () => {
   socket.emit('typing', handle.value);
-})
+});
 
 // Listen for events
 socket.on('chat', data => {
