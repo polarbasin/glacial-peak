@@ -7,6 +7,7 @@ const session = require('express-session');
 const handlers = require('./handlers');
 const rss = require('./rss.js');
 const fbAuth = require('./config/facebook_passport');
+require('dotenv').config();
 require('./dbConnect');
 require('./config/passport')(passport);
 

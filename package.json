@@ -44,6 +44,7 @@
     "bootstrap": "^3.3.6",
     "concurrently": "^2.0.0",
     "core-js": "^2.4.0",
+    "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "express-session": "^1.14.0",
     "feedme": "^0.3.2",
