@@ -40,10 +40,13 @@ app.use('/client/event.service.js', express.static('client/event.service.js'));
 app.use('/client/event-form.component.js', express.static('client/event-form.component.js'));
 app.use('/client/app.component.js', express.static('client/app.component.js'));
 app.use('/client/app-layout.component.js', express.static('client/app-layout.component.js'));
-
 app.use('/client/rxjs-operators.js', express.static('client/rxjs-operators.js'));
-
 app.use('/client/datatypes/event.js', express.static('client/datatypes/event.js'));
+
+// Fuzzy Lobster Added component routes
+app.use('/client/profile.component.js', express.static('client/profile.component.js'));
+app.use('/client/profile-button.component.js', express.static('client/profile-button.component.js'));
+
 
 // facebook auth
 app.get('/login/facebook',
