@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Headers, Http } from '@angular/http';
+import { EvindService } from './evind.service';
+
 // import { Http } from '@angular/http';
 // import { EventService } from './event.service';
 // import { ROUTER_DIRECTIVES } from '@angular/router';
@@ -7,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'eview',
   // directives: [ROUTER_DIRECTIVES],
-  // providers: [EventService],
+  providers: [EvindService],
   template: `
     <div id="eventview">
       <div class="eventHeader">{{id}} {{eventName}}</div>
@@ -28,12 +31,11 @@ import { ActivatedRoute } from '@angular/router';
         Event Chat Room
       </div>
     </div>
-  `
+  // `,
+  // providers: [EvindService]
 })
 
 export class EviewComponent { 
-
-  private sub: any;
 
   id: string;
   eventDate: string;
@@ -46,7 +48,9 @@ export class EviewComponent {
   showChatText: string;
   showChat: boolean;
 
-  constructor(private route: ActivatedRoute) {
+  getData: string;
+
+  constructor(private route: ActivatedRoute, private _httpService: EvindService) {
     this.id = route.snapshot.params['id'];
     this.eventName = 'Presenting the improved nolaBored';
     this.eventDate = 'Friday, September 29th, 2017 5:00PM';
@@ -58,6 +62,21 @@ export class EviewComponent {
     this.showChatText = 'Go to event chat room';
     this.showChat = false;
   }
+  onTestGet(id) {
+    // const ev = 
+    this._httpService.getEvent(id).subscribe(data => {
+      console.log('data', data);
+      this.getData = JSON.stringify(data);
+      console.log('getdata', this.getData);
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('GET request complete');
+    });
+  }
+  ngOnInit() {
+    this.onTestGet(this.id);
+  }
   toggleChat() {
     if (this.showChat === true) {
       this.showChat = false;
@@ -67,5 +86,4 @@ export class EviewComponent {
       this.showChatText = 'Hide event chat room';
     }
   }
-
 }
