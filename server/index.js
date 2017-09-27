@@ -8,9 +8,13 @@ const handlers = require('./handlers');
 const rss = require('./rss.js');
 const fbAuth = require('./config/facebook_passport');
 const socket = require('socket.io');
+const path = require('path');
 require('dotenv').config();
 require('./dbConnect');
 require('./config/passport')(passport);
+
+// Models
+const Event = require('../server/models/Event');
 
 app.use(morgan('dev'));
 
@@ -65,6 +69,38 @@ const port = process.env.PORT || 4657;
 const feed = 'http://www.bestofneworleans.com/gambit/Rss.xml?section=1222783';
 rss.requestRSS(feed);
 // rss.request();
+
+// Get data from database
+
+// Get all events
+app.get('/events', (req, res) => {
+  Event.find((err, event) => {
+    if (err) {
+      console.error(err);
+      return res.send(err);
+    } else {
+      res.json(event);
+    }
+  });
+});
+
+// Get events by id
+app.get('/events/:id', (req, res) => {
+  Event.findById(req.params.id, (err, event) => {
+   if (err) {
+     console.error(err);
+     return res.send(err);
+   } else {
+     res.json(event);
+   }
+  });
+});
+
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 const server = app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
