@@ -9,7 +9,7 @@ export const routes = [
   { path: '', component: AppLayoutComponent, terminal: true },
   { path: 'login', component: LoginComponent },
   { path: 'add-event', component: EventFormComponent },
-  { path: 'eview', component: EviewComponent }
+  { path: 'eview/:id', component: EviewComponent }
 ];
 
 export const APP_ROUTES_PROVIDER = provideRouter(routes);
