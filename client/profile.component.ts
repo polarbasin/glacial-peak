@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
     email: String;
     events: any;
 
+<<<<<<< HEAD
     constructor(public eventService:EventService) {
     }
     ngOnInit() {
@@ -36,6 +37,11 @@ export class ProfileComponent implements OnInit {
                 this.image = profile.facebook.image;
                 this.email = profile.facebook.email;
             },
+=======
+    constructor(private eventService:EventService) {
+        eventService.profile.subscribe(
+            profile => this.profile = profile,
+>>>>>>> Changed event service method in profile
             error => console.error('error ' + error),
             () => console.log('Completed!', this.profile)
         );
