@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 // import { Http } from '@angular/http';
 // import { EventService } from './event.service';
 // import { ROUTER_DIRECTIVES } from '@angular/router';
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
   // providers: [EventService],
   template: `
     <div id="eventview">
-      <div class="eventHeader">{{eventName}}</div>
+      <div class="eventHeader">{{id}} {{eventName}}</div>
       <div class="eventPict"><img src={{eventPict}}></div>
       <div class="eventInfo">
         <span class="eventDate">{{eventDate}}</span><br>
@@ -32,6 +33,9 @@ import { Component } from '@angular/core';
 
 export class EviewComponent { 
 
+  private sub: any;
+
+  id: string;
   eventDate: string;
   eventName: string;
   eventLocation: string;
@@ -42,7 +46,8 @@ export class EviewComponent {
   showChatText: string;
   showChat: boolean;
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
+    this.id = route.snapshot.params['id'];
     this.eventName = 'Presenting the improved nolaBored';
     this.eventDate = 'Friday, September 29th, 2017 5:00PM';
     this.eventLocation = 'Operation Spark - 748 Camp St New Orleans, LA 70130';
