@@ -19,7 +19,7 @@ module.exports = passport => {
     clientID: fbAuth.clientID,
     clientSecret: fbAuth.clientSecret,
     callbackURL: fbAuth.callbackURL,
-    profileField: fbAuth.profileField,
+    profileFields: fbAuth.profileFields,
   },
   (accessToken, refreshToken, profile, done) => {
     process.nextTick(() => {
@@ -37,6 +37,7 @@ module.exports = passport => {
               displayName: profile.displayName,
               email: profile.email,
               firstName: profile.displayName.split(' ')[0],
+              image: profile.photos[0].value,
             },
           });
 

@@ -8,6 +8,7 @@ const User = new Schema({
     displayName: String,
     email: String,
     firstName: String,
+    image: String,
   }
 });
 
