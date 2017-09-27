@@ -13,7 +13,7 @@ const event_service_1 = require('./event.service');
 let ProfileComponent = class ProfileComponent {
     constructor(eventService) {
         this.eventService = eventService;
-        eventService.events.subscribe(profile => this.profile = profile, error => console.error('error ' + error), () => console.log('Completed!'));
+        eventService.profile.subscribe(profile => this.profile = profile, error => console.error('error ' + error), () => console.log('Completed!'));
     }
     ngOnInit() {
         console.log('Profile Initialized!');

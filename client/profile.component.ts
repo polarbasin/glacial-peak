@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
     public name: String;
     public image: String;
 
+<<<<<<< HEAD
     constructor(public eventService:EventService) {
         
     }
@@ -48,6 +49,11 @@ export class ProfileComponent implements OnInit {
                 this.name = profile.facebook.displayName;
                 this.image = profile.facebook.image;
             },
+=======
+    constructor(private eventService:EventService) {
+        eventService.profile.subscribe(
+            profile => this.profile = profile,
+>>>>>>> Changed event service method in profile
             error => console.error('error ' + error),
             () => console.log('Completed!', this.profile)
         );
