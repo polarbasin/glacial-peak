@@ -6,18 +6,34 @@ const getImgUrl = str => {
 };
 
 const saveEvent = event => {
-  var newEvent = new Event({
+  Event.findOrCreate({
     title: event.title,
     link: event.link,
     description: event.description,
     imgUrl: event.imgUrl || getImgUrl(event.description),
-    // extras
-    // time: event.eventData,
-    // postedBy: event.userID,
+  }, (err, entry, created) => {
+    if (err) {
+      console.error('error saving event', err);
+    } else {
+      if (created) {
+        console.log('event successfully created', entry.title);
+      } else {
+        console.log('event already exists', entry.title);
+      }
+    }
   });
-  newEvent.save(err => {
-    if (err) return console.error('err');
-  });
+  // var newEvent = new Event({
+  //   title: event.title,
+  //   link: event.link,
+  //   description: event.description,
+  //   imgUrl: event.imgUrl || getImgUrl(event.description),
+  //   // extras
+  //   // time: event.eventData,
+  //   // postedBy: event.userID,
+  // });
+  // newEvent.save(err => {
+  //   if (err) return console.error('err');
+  // });
 };
 
 module.exports = saveEvent;
