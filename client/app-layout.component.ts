@@ -7,7 +7,7 @@ import { EventService } from './event.service';
 @Component({
   selector: 'app-layout',
   template:
-  `<div><eview></eview></div>
+  `<div><a routerLink="/eview">View Event</a></div>
   <div><login-button></login-button></div>
     <div><add-event-button></add-event-button></div>
     <div class="col-md-12" id="header"><h1>BORED<span class="question">?</span></h1>
