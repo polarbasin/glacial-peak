@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventService } from './event.service';
 
 @Component({
     selector: 'profile',
@@ -30,6 +31,20 @@ import { Component } from '@angular/core';
     styleUrls: ['profile.component.css']
 })
 
-export class ProfileComponent {
-    test = 'confirm'
+export class ProfileComponent implements OnInit {
+    public errorMessage: any;
+    public profile: any;
+
+    constructor(private eventService:EventService) {
+        eventService.events.subscribe(
+            profile => this.profile = profile,
+            error => console.error('error ' + error),
+            () => console.log('Completed!')
+          );
+     }
+     ngOnInit() {
+        console.log('Profile Initialized!');
+      }
+
 }
+

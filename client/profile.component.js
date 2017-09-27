@@ -9,9 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const event_service_1 = require('./event.service');
 let ProfileComponent = class ProfileComponent {
-    constructor() {
-        this.test = 'confirm';
+    constructor(eventService) {
+        this.eventService = eventService;
+        eventService.events.subscribe(profile => this.profile = profile, error => console.error('error ' + error), () => console.log('Completed!'));
+    }
+    ngOnInit() {
+        console.log('Profile Initialized!');
     }
 };
 ProfileComponent = __decorate([
@@ -44,7 +49,7 @@ ProfileComponent = __decorate([
   `,
         styleUrls: ['profile.component.css']
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [event_service_1.EventService])
 ], ProfileComponent);
 exports.ProfileComponent = ProfileComponent;
 //# sourceMappingURL=profile.component.js.map
