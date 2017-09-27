@@ -7,9 +7,17 @@ import 'rxjs/add/operator/map';
 export class EventService {
   public eventsUrl = 'api/events';  // URL to web api
   public events: any;
+  // public profileUrl = ''; //URL to facebook api
+  // public profile: any;
 
   constructor(public http: Http) {
     this.events = http.get(this.eventsUrl)
-                      .map(response => response.json()); 
+                      .map(response => response.json());
+                      
+    // this.profile = http.get(this.profileUrl)
+    //                   .map(response => response.json()); 
+
   }
+
+ 
 }
