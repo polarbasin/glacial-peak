@@ -14,7 +14,7 @@ import { APP_ROUTES_PROVIDER }     from './app.routes';
   imports: [
     BrowserModule,
     HttpModule,
-    JsonpModule,
+    JsonpModule
   ],
   declarations: [ 
     AppComponent, 
