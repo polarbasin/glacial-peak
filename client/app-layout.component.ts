@@ -22,6 +22,7 @@ import { EventService } from './event.service';
                 <h3>{{ event.title }}</h3>
               </a>
               <img src="{{ event.imgUrl }}">
+              <a [routerLink]="['/eview/:id', event._id]">{{event._id}}</a>
             </div>
           </div>
         </div>
