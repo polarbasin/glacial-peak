@@ -17,8 +17,8 @@ import { EvindService } from './evind.service';
       <div class="eventPict"><img src={{eventPict}}></div>
       <div class="eventLink"><a href={{eventLink}} target="_blank">View More Info</a></div>
       <div class="eventInfo">
-        <span class="eventDate">{{eventDate}}</span><br>
-        <span class="eventLocation">{{eventLocation}}</span>
+        <span class="eventDate"><b>Date:</b> {{eventDate}}</span><br>
+        <span class="eventLocation"><b>Location:</b> {{eventLocation}}</span>
       </div>
       <div class="eventDesc">{{eventDesc}}</div>
       <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
