@@ -13,26 +13,20 @@ import { EvindService } from './evind.service';
   providers: [EvindService],
   template: `
     <div id="eventview">
-      <div class="eventHeader">{{id}} {{eventName}}</div>
+      <div class="eventHeader">{{eventName}}</div>
       <div class="eventPict"><img src={{eventPict}}></div>
+      <div class="eventLink"><a href={{eventLink}} target="_blank">View More Info</a></div>
       <div class="eventInfo">
         <span class="eventDate">{{eventDate}}</span><br>
         <span class="eventLocation">{{eventLocation}}</span>
       </div>
       <div class="eventDesc">{{eventDesc}}</div>
-      <div class="attenting">
-      <b>People attending this event:</b><br>
-        <ul>
-        <li *ngFor="let person of attending">{{person}}</li>
-        </ul>
-      </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
         Event Chat Room
       </div>
-    </div>
-  // `,
-  // providers: [EvindService]
+      <div class="entryBackLink"><a routerLink="/">Back</a></div>
+    </div> `
 })
 
 export class EviewComponent { 
@@ -47,27 +41,28 @@ export class EviewComponent {
   attending: string[];
   showChatText: string;
   showChat: boolean;
-
-  getData: string;
+  getData: any;
 
   constructor(private route: ActivatedRoute, private _httpService: EvindService) {
     this.id = route.snapshot.params['id'];
-    this.eventName = 'Presenting the improved nolaBored';
-    this.eventDate = 'Friday, September 29th, 2017 5:00PM';
-    this.eventLocation = 'Operation Spark - 748 Camp St New Orleans, LA 70130';
-    this.eventPict = 'https://i.imgur.com/2TBGE8r.jpg';
-    this.eventLink = '';
-    this.eventDesc = 'Team FuzzyLobster has been working all week to improve the nolaBored app, come see what they changed!';
-    this.attending = ['Aaron', 'Jake', 'Violet'];
     this.showChatText = 'Go to event chat room';
     this.showChat = false;
+    // this.eventName = this.getData.title;
+    // this.eventDate = 'Friday, September 29th, 2017 5:00PM';
+    // this.eventLocation = 'Operation Spark - 748 Camp St New Orleans, LA 70130';
+    // this.eventPict = 'https://i.imgur.com/2TBGE8r.jpg';
+    // this.eventLink = '';
+    // this.eventDesc = 'Team FuzzyLobster has been working all week to improve the nolaBored app, come see what they changed!';
+    // this.attending = ['Aaron', 'Jake', 'Violet'];
   }
   onTestGet(id) {
-    // const ev = 
     this._httpService.getEvent(id).subscribe(data => {
-      console.log('data', data);
-      this.getData = JSON.stringify(data);
-      console.log('getdata', this.getData);
+      console.log(data);
+      this.getData = data;
+      this.eventName = data.title;
+      this.eventPict = data.imgUrl;
+      this.eventLink = data.link;
+      this.eventDesc = data.description;
     }, error => {
       console.error(error);
     }, () => {
