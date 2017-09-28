@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate');
 
 const eventSchema = mongoose.Schema({
   title: String,
@@ -9,6 +10,8 @@ const eventSchema = mongoose.Schema({
   description: String,
   imgUrl: String,
 });
+
+eventSchema.plugin(findOrCreate);
 
 const Event = mongoose.model('Event', eventSchema);
 
