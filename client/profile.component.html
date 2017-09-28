@@ -1,0 +1,33 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<!-- Latest compiled and minified CSS -->
+
+
+<div></div>
+<div id=profileHeader>
+    <div class="fb-profile">
+    <div >    
+    <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
+        <img align="left" class="fb-image-profile thumbnail" src={{image}} alt="Profile image example"/>
+       
+    </div>
+    <h1>{{name}}</h1>
+   
+</div> <!-- /container -->  
+
+<div class="move">
+    <div class="container">
+      <div class="events">
+        <div class="row">
+          <div class="col-md-4" id="event" *ngFor="let event of events; let i = index">
+            <div class="details">
+              <a target="_blank" href="{{event.link}}">
+                <h3>{{ event.title }}</h3>
+              </a>
+              <img src="{{ event.imgUrl }}"><br>
+              <a [routerLink]="['/eview/', event._id]">View this Event</a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </div>
+</div>
