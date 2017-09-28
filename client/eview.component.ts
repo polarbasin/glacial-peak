@@ -22,16 +22,23 @@ import { EvindService } from './evind.service';
       </div>
       <div class="eventDesc">{{eventDesc}}</div>
       <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
+      <div class="attending">
+        <b>People Attending this Event:</b>
+        <div class="attendlist"></div>
+        <button>I'm interested in this event!</button>
+      </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
-        Event Chat Room<br>
-        <div id="chat-window">
-          <div id="output"></div>
-          <div id="feedback"></div>
+        <div id="chatroom">
+          <div class="chatheader">Event Chat Room</div><br>
+          <div id="chat-window">
+            <div id="output"></div>
+            <div id="feedback"></div>
+          </div>
+          <input id="handle" type="text" placeholder="Handle" />
+          <input id="message" type="text" placeholder="Message" />
+          <button id="send">Send</button>
         </div>
-        <input id="handle" type="text" placeholder="Handle" />
-        <input id="message" type="text" placeholder="Message" />
-        <button id="send">Send</button>
       </div>
       <div class="entryBackLink"><a routerLink="/">Back</a></div>
     </div> `

@@ -252,6 +252,22 @@ legend {
   margin-bottom: 10px;
 }
 
+.attending {
+  margin-bottom: 10px;
+}
+
 .entryBackLink {
   text-align: center !important;
+}
+
+#chatroom {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.chatheader {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
