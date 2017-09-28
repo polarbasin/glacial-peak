@@ -25,9 +25,13 @@ import { ProfileButtonComponent }  from './profile-button.component';
     LoginComponent,
     LoginButtonComponent,
     AddEventButtonComponent,
+<<<<<<< HEAD
 
     EviewComponent,
 
+=======
+    EviewComponent,
+>>>>>>> [improve] Profile View
     ProfileComponent,
     ProfileButtonComponent,
 
