@@ -15,7 +15,7 @@ export class EvindService {
     });
   }
   attendEvent(user) {
-    return this._http.post('events/adduser', user)
+    return this._http.post('adduser/', user)
       .map(res => {
         return res.json();
       });

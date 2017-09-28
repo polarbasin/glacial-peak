@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Headers, Http } from '@angular/http';
 import { EvindService } from './evind.service';
+import { EventService } from './event.service';
 // import { AttEvService } from './attendevent.service';
 
 // import { Http } from '@angular/http';
@@ -59,8 +60,12 @@ export class EviewComponent {
   showChatText: string;
   showChat: boolean;
   getData: any;
+  profile: any;
+  name: string;
+  image: string;
+  userID: string;
 
-  constructor(private route: ActivatedRoute, private _httpService: EvindService) {
+  constructor(private route: ActivatedRoute, private _httpService: EvindService, public eventService: EventService) {
     this.id = route.snapshot.params['id'];
     this.showChatText = 'Go to event chat room';
     this.showChat = false;
@@ -101,9 +106,20 @@ export class EviewComponent {
   }
   ngOnInit() {
     this.onTestGet(this.id);
+    this.eventService.profile.subscribe(profile => {
+      console.log(profile);
+      this.userID = profile.facebook.id;
+      this.profile = profile;
+      this.name = profile.facebook.displayName;
+      this.image = profile.facebook.image;
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('complete');
+    })
   }
   handleAttend() {
-    this.attEvent(this.getData);
+    this.attEvent({id: this.userID, event: this.getData});
   }
   toggleChat() {
     if (this.showChat === true) {
