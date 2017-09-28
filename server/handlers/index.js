@@ -12,6 +12,7 @@ module.exports = {
     });
   },
   postEvent: (req, res) => {
+    console.log(req);
     let event = req.body;
     console.log('user', req.user);
     console.log('event', event);
