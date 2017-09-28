@@ -21,6 +21,7 @@ import { EvindService } from './evind.service';
         <span class="eventLocation">{{eventLocation}}</span>
       </div>
       <div class="eventDesc">{{eventDesc}}</div>
+      <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
         Event Chat Room<br>
@@ -45,6 +46,7 @@ export class EviewComponent {
   eventLink: string;
   eventPict: string;
   eventDesc: string;
+  eventPostBy: string;
   attending: string[];
   showChatText: string;
   showChat: boolean;
@@ -70,6 +72,8 @@ export class EviewComponent {
       this.eventPict = data.imgUrl;
       this.eventLink = data.link;
       this.eventDesc = data.description;
+      this.eventPostBy = data.author;
+      this.eventLocation = data.location;
     }, error => {
       console.error(error);
     }, () => {
