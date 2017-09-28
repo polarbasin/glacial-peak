@@ -9,10 +9,8 @@ export class EvindService {
 
   }
   getEvent(id) {
-    console.log('worked', id);
     return this._http.get(`events/${id}`)
     .map(res => {
-      console.log('res', res);
       return res.json();
     });
   }
