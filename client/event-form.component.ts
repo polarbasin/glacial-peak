@@ -22,6 +22,32 @@ import { Component } from '@angular/core';
 
         <!-- Text input-->
         <div class="form-group">
+          <label class="col-md-4 control-label" for="eventDate">Event Date</label>  
+          <div class="col-md-5">
+          <input id="eventDate" name="eventDate" type="date" placeholder="" class="form-control input-md">
+            
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="location">Event Location</label>  
+          <div class="col-md-5">
+          <input id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
+            
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="description">Description</label>
+          <div class="col-md-3">                     
+            <textarea class="form-control" id="description" placeholder="..." name="description"></textarea>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
           <label class="col-md-4 control-label" for="link">Event Link</label>  
           <div class="col-md-5">
           <input id="link" name="link" type="text" placeholder="www.event.com" class="form-control input-md">
@@ -38,22 +64,6 @@ import { Component } from '@angular/core';
           </div>
         </div>
 
-        <!-- Textarea -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="description">Description</label>
-          <div class="col-md-3">                     
-            <textarea class="form-control" id="description" placeholder="..." name="description"></textarea>
-          </div>
-        </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="eventDate">Event Date</label>  
-          <div class="col-md-5">
-          <input id="eventDate" name="eventDate" type="date" placeholder="" class="form-control input-md">
-            
-          </div>
-        </div>
 
         <!-- Button -->
         <div class="form-group">
