@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Headers, Http } from '@angular/http';
 import { EvindService } from './evind.service';
+import { EventService } from './event.service';
+// import { AttEvService } from './attendevent.service';
 
 // import { Http } from '@angular/http';
 // import { EventService } from './event.service';
@@ -25,7 +27,7 @@ import { EvindService } from './evind.service';
       <div class="attending">
         <b>People Attending this Event:</b>
         <div class="attendlist"></div>
-        <button>I'm interested in this event!</button>
+        <button (click)="handleAttend()">I'm interested in this event!</button>
       </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
@@ -58,8 +60,12 @@ export class EviewComponent {
   showChatText: string;
   showChat: boolean;
   getData: any;
+  profile: any;
+  name: string;
+  image: string;
+  userID: string;
 
-  constructor(private route: ActivatedRoute, private _httpService: EvindService) {
+  constructor(private route: ActivatedRoute, private _httpService: EvindService, public eventService: EventService) {
     this.id = route.snapshot.params['id'];
     this.showChatText = 'Go to event chat room';
     this.showChat = false;
@@ -82,14 +88,38 @@ export class EviewComponent {
       this.eventDesc = data.description;
       this.eventPostBy = data.author;
       this.eventLocation = data.location;
+      this.attending = data.attending;
     }, error => {
       console.error(error);
     }, () => {
       console.log('GET request complete');
     });
   }
+  attEvent(user) {
+    this._httpService.attendEvent(user).subscribe(() => {
+      console.log('Successful POST request');
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('Request complete');
+    });
+  }
   ngOnInit() {
     this.onTestGet(this.id);
+    this.eventService.profile.subscribe(profile => {
+      console.log(profile);
+      this.userID = profile.facebook.id;
+      this.profile = profile;
+      this.name = profile.facebook.displayName;
+      this.image = profile.facebook.image;
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('complete');
+    })
+  }
+  handleAttend() {
+    this.attEvent({id: this.userID, event: this.getData});
   }
   toggleChat() {
     if (this.showChat === true) {

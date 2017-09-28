@@ -1,5 +1,6 @@
 const Event = require('../models/Event.js');
 const saveEvent = require('../controllers/eventcontroller');
+const passport = require('passport');
 
 module.exports = {
   getEvents: (req, res) => {
@@ -32,15 +33,12 @@ module.exports = {
     res.redirect('/');
   },
   addToAttending: (req, res) => {
-    if (!req.user) {
-      res.status(404).send('not logged in!');
-    } else { 
-
-      const profile = req.user;
-      const id = profile.facebook.id;
+    // console.log('made it', req.body);
+    // res.status(201).send(req.body);
+      const id = req.body.id;
       const event = req.body.event;
       let currentAttending = req.body.event.attending;
-      Event.findOneAndUpdate({ where: { id: event.id }}, { attending: currentAttending.concat(id)}, (err, event) => {
+      Event.findOneAndUpdate({ title: event.title }, { attending: currentAttending.concat(id)}, (err, event) => {
         if (err) {
           console.log('error updating attending:', err);
           res.status(404).send('not found or updated');
@@ -49,6 +47,5 @@ module.exports = {
 
         }
       });
-    }
   }
 };

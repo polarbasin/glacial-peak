@@ -109,8 +109,8 @@ app.get('/events/:id', (req, res) => {
 });
 
 //add user to event
-app.route('events/adduser')
-  .post(handlers.addToAttending);
+app.post('/adduser', handlers.addToAttending);
+  // .post(handlers.addToAttending);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
