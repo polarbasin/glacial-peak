@@ -216,3 +216,42 @@ legend {
 .login-submit:hover {
   background-color: #adcbfa;
 }
+
+#eventview {
+  background-color: #FFFFFF;
+  border: 10px solid #0099cc;
+  padding: 10px;
+  color: #000000 !important;
+  text-align: justify !important;
+}
+
+.eventHeader {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.eventPict img{
+  border: 7px solid #C4C4C4;
+}
+
+.eventLink {
+  font-size: 12px;
+}
+
+.eventInfo {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.eventDesc {
+  margin-bottom: 5px;
+}
+
+.postedBy {
+  margin-bottom: 10px;
+}
+
+.entryBackLink {
+  text-align: center !important;
+}
