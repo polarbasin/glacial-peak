@@ -9,10 +9,10 @@ import { EventService } from './event.service';
       <div class="fb-profile">
       <div >    
       <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
-          <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
+          <img align="left" class="fb-image-profile thumbnail" src={{image}} alt="Profile image example"/>
          
       </div>
-      <h1>Eli Macy</h1>
+      <h1>{{name}}</h1>
      
   </div> <!-- /container -->  
   
@@ -28,23 +28,31 @@ import { EventService } from './event.service';
    
 
   `,
-    styleUrls: ['profile.component.css']
+    styleUrls: ['profile.component.css'],
+    providers: [EventService]
 })
 
 export class ProfileComponent implements OnInit {
     public errorMessage: any;
     public profile: any;
+    public name: String;
+    public image: String;
 
-    constructor(private eventService:EventService) {
-        eventService.events.subscribe(
-            profile => this.profile = profile,
+    constructor(public eventService:EventService) {
+        
+    }
+    ngOnInit() {
+        this.eventService.profile.subscribe(
+            (profile)=> {
+                this.profile = profile;
+                this.name = profile.facebook.displayName;
+                this.image = profile.facebook.image;
+            },
             error => console.error('error ' + error),
-            () => console.log('Completed!')
-          );
-     }
-     ngOnInit() {
+            () => console.log('Completed!', this.profile)
+        );
         console.log('Profile Initialized!');
-      }
+    }
 
 }
 

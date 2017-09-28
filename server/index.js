@@ -70,6 +70,10 @@ app.route('/api/events')
   .get(handlers.getEvents)
   .post(handlers.isAuthenticated, handlers.postEvent);
 
+app.get('/profileInfo', (req, res) => {
+  res.send(req.user);
+});
+
 const port = process.env.PORT || 4657;
 
 //these lines will parse the information out of the file where we load the rss fead
