@@ -4,7 +4,7 @@ const findOrCreate = require('mongoose-findorcreate');
 const eventSchema = mongoose.Schema({
   title: String,
   location: String,
-  time: Date, 
+  eventDate: String, 
   link: String,
   author: String,
   description: String,
