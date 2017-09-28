@@ -15,11 +15,12 @@
 </div> <!-- /container -->  
 
 <div class="move">
+        <h2>Your Events</h2>
     <div class="container">
       <div class="events">
         <div class="row">
-          <div class="col-md-4" id="event" *ngFor="let event of events; let i = index">
-            <div class="details">
+          <div class="col-md-4" id="event" *ngFor="let event of events; let i = index" [hidden]="(!event.attending.includes(userId))">
+            <div  class="details">
               <a target="_blank" href="{{event.link}}">
                 <h3>{{ event.title }}</h3>
               </a>

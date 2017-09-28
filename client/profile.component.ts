@@ -1,16 +1,15 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule} from '@angular/core';
 import { Event }        from './datatypes/event';
 import { EventService } from './event.service';
-import { EvindService } from './evind.service';
-import { NgModel, NgFor } from '@angular/common';
+import { NgFor, NgIf, NgModel } from '@angular/common';
 
 
 @Component({
     selector: 'profile',
     templateUrl: './profile.component.html',
     styleUrls: ['profile.component.css'],
-    providers: [EventService, EvindService],
-    directives: [ NgModel, NgFor ]
+    providers: [EventService],
+    directives: [NgFor, NgIf ]
 })
 
 export class ProfileComponent implements OnInit {
@@ -19,7 +18,9 @@ export class ProfileComponent implements OnInit {
     name: String;
     image: String;
     email: String;
+    userId: String;
     events: any;
+    
 
     constructor(public eventService:EventService) {
     }
@@ -27,7 +28,7 @@ export class ProfileComponent implements OnInit {
         this.eventService.events.subscribe(
             events => this.events = events,
             error => console.error('error ' + error),
-            () => console.log('Completed!')
+            () => console.log(this.events[0])
           );
         this.eventService.profile.subscribe(
             (profile)=> {
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
                 this.name = profile.facebook.displayName;
                 this.image = profile.facebook.image;
                 this.email = profile.facebook.email;
+                this.userId = profile.facebook._id;
             },
             error => console.error('error ' + error),
             () => console.log('Completed!', this.profile)
