@@ -87,14 +87,7 @@ h1 {
   overflow: hidden;
 }
 
-.banner {
-  width: 100%;
-  height: Auto;
-  position: relative;
-  text-align: left;
-}
-
-img:not(.fb-image-lg) {
+img {
   max-width: 225px;
   max-height: 175px;
   float: bottom;
