@@ -14,4 +14,10 @@ export class EvindService {
       return res.json();
     });
   }
+  attendEvent(user) {
+    return this._http.post('events/adduser', user)
+      .map(res => {
+        return res.json();
+      });
+  }
 }

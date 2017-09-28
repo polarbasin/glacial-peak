@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Headers, Http } from '@angular/http';
 import { EvindService } from './evind.service';
+// import { AttEvService } from './attendevent.service';
 
 // import { Http } from '@angular/http';
 // import { EventService } from './event.service';
@@ -25,7 +26,7 @@ import { EvindService } from './evind.service';
       <div class="attending">
         <b>People Attending this Event:</b>
         <div class="attendlist"></div>
-        <button>I'm interested in this event!</button>
+        <button (click)="handleAttend()">I'm interested in this event!</button>
       </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
@@ -82,14 +83,27 @@ export class EviewComponent {
       this.eventDesc = data.description;
       this.eventPostBy = data.author;
       this.eventLocation = data.location;
+      this.attending = data.attending;
     }, error => {
       console.error(error);
     }, () => {
       console.log('GET request complete');
     });
   }
+  attEvent(user) {
+    this._httpService.attendEvent(user).subscribe(() => {
+      console.log('Successful POST request');
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('Request complete');
+    });
+  }
   ngOnInit() {
     this.onTestGet(this.id);
+  }
+  handleAttend() {
+    this.attEvent(this.getData);
   }
   toggleChat() {
     if (this.showChat === true) {
