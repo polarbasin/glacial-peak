@@ -69,6 +69,7 @@ export class EviewComponent {
       console.log(data);
       this.getData = data;
       this.eventName = data.title;
+      this.eventDate = data.eventDate;
       this.eventPict = data.imgUrl;
       this.eventLink = data.link;
       this.eventDesc = data.description;
