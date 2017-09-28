@@ -16,6 +16,8 @@ module.exports = {
     let event = req.body;
     console.log('user', req.user);
     console.log('event', event);
+    event.attending = [];
+    // console.log(event);
     saveEvent(event);
     res.redirect('/');
   },

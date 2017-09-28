@@ -9,6 +9,7 @@ const eventSchema = mongoose.Schema({
   author: String,
   description: String,
   imgUrl: String,
+  attending: []
 });
 
 eventSchema.plugin(findOrCreate);
