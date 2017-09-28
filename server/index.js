@@ -8,8 +8,14 @@ const session = require('express-session');
 const handlers = require('./handlers');
 const rss = require('./rss.js');
 const fbAuth = require('./config/facebook_passport');
+const socket = require('socket.io');
+const path = require('path');
+require('dotenv').config();
 require('./dbConnect');
 require('./config/passport')(passport);
+
+// Models
+const Event = require('../server/models/Event');
 
 app.use(morgan('dev'));
 
@@ -40,6 +46,10 @@ app.use('/client/event.service.js', express.static('client/event.service.js'));
 app.use('/client/event-form.component.js', express.static('client/event-form.component.js'));
 app.use('/client/app.component.js', express.static('client/app.component.js'));
 app.use('/client/app-layout.component.js', express.static('client/app-layout.component.js'));
+
+app.use('/client/eview.component.js', express.static('client/eview.component.js'));
+app.use('/client/evind.service.js', express.static('client/evind.service.js'));
+
 app.use('/client/rxjs-operators.js', express.static('client/rxjs-operators.js'));
 app.use('/client/datatypes/event.js', express.static('client/datatypes/event.js'));
 
@@ -67,6 +77,55 @@ const feed = 'http://www.bestofneworleans.com/gambit/Rss.xml?section=1222783';
 rss.requestRSS(feed);
 // rss.request();
 
-app.listen(port, () => {
+// Get data from database
+
+// Get all events
+app.get('/events', (req, res) => {
+  Event.find((err, event) => {
+    if (err) {
+      console.error(err);
+      return res.send(err);
+    } else {
+      res.json(event);
+    }
+  });
+});
+
+// Get events by id
+app.get('/events/:id', (req, res) => {
+  Event.findById(req.params.id, (err, event) => {
+   if (err) {
+     console.error(err);
+     return res.send(err);
+   } else {
+     res.json(event);
+   }
+  });
+});
+
+
+// Catch all other routes and return the index file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
+
+const server = app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
+
+// Socket
+const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('made socket connection');
+  console.log('socket', socket.id);
+
+  socket.on('chat', (data) => {
+    io.sockets.emit('chat', data);
+  });
+
+  socket.on('typing', (data) => {
+    socket.broadcast.emit('typing', data);
+  });
+})
+

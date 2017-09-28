@@ -7,6 +7,7 @@ import { EventFormComponent }      from './event-form.component';
 import { LoginButtonComponent }    from './login-button.component';
 import { AddEventButtonComponent } from './add-event-button.component';
 import { LoginComponent }          from './login.component';
+import { EviewComponent }          from './eview.component';
 import { APP_ROUTES_PROVIDER }     from './app.routes';
 import { ProfileComponent }        from './profile.component';
 import { ProfileButtonComponent }  from './profile-button.component';
@@ -15,7 +16,7 @@ import { ProfileButtonComponent }  from './profile-button.component';
   imports: [
     BrowserModule,
     HttpModule,
-    JsonpModule,
+    JsonpModule
   ],
   declarations: [ 
     AppComponent, 
@@ -24,8 +25,12 @@ import { ProfileButtonComponent }  from './profile-button.component';
     LoginComponent,
     LoginButtonComponent,
     AddEventButtonComponent,
+
+    EviewComponent
+
     ProfileComponent,
     ProfileButtonComponent,
+
   ],
   providers: [
     APP_ROUTES_PROVIDER
