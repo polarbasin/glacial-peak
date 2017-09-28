@@ -22,6 +22,12 @@ let EvindService = class EvindService {
             return res.json();
         });
     }
+    attendEvent(user) {
+        return this._http.post('adduser/', user)
+            .map(res => {
+            return res.json();
+        });
+    }
 };
 EvindService = __decorate([
     core_1.Injectable(), 

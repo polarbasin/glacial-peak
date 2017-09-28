@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const router_1 = require('@angular/router');
 const evind_service_1 = require('./evind.service');
+const event_service_1 = require('./event.service');
+// import { AttEvService } from './attendevent.service';
 // import { Http } from '@angular/http';
 // import { EventService } from './event.service';
 // import { ROUTER_DIRECTIVES } from '@angular/router';
 let EviewComponent = class EviewComponent {
-    constructor(route, _httpService) {
+    constructor(route, _httpService, eventService) {
         this.route = route;
         this._httpService = _httpService;
+        this.eventService = eventService;
         this.id = route.snapshot.params['id'];
         this.showChatText = 'Go to event chat room';
         this.showChat = false;
@@ -40,14 +43,38 @@ let EviewComponent = class EviewComponent {
             this.eventDesc = data.description;
             this.eventPostBy = data.author;
             this.eventLocation = data.location;
+            this.attending = data.attending;
         }, error => {
             console.error(error);
         }, () => {
             console.log('GET request complete');
         });
     }
+    attEvent(user) {
+        this._httpService.attendEvent(user).subscribe(() => {
+            console.log('Successful POST request');
+        }, error => {
+            console.error(error);
+        }, () => {
+            console.log('Request complete');
+        });
+    }
     ngOnInit() {
         this.onTestGet(this.id);
+        this.eventService.profile.subscribe(profile => {
+            console.log(profile);
+            this.userID = profile.facebook.id;
+            this.profile = profile;
+            this.name = profile.facebook.displayName;
+            this.image = profile.facebook.image;
+        }, error => {
+            console.error(error);
+        }, () => {
+            console.log('complete');
+        });
+    }
+    handleAttend() {
+        this.attEvent({ id: this.name, event: this.getData });
     }
     toggleChat() {
         if (this.showChat === true) {
@@ -79,7 +106,7 @@ EviewComponent = __decorate([
       <div class="attending">
         <b>People Attending this Event:</b>
         <div class="attendlist"></div>
-        <button>I'm interested in this event!</button>
+        <button (click)="handleAttend()">I'm interested in this event!</button>
       </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
@@ -97,7 +124,7 @@ EviewComponent = __decorate([
       <div class="entryBackLink"><a routerLink="/">Back</a></div>
     </div> `
     }), 
-    __metadata('design:paramtypes', [router_1.ActivatedRoute, evind_service_1.EvindService])
+    __metadata('design:paramtypes', [router_1.ActivatedRoute, evind_service_1.EvindService, event_service_1.EventService])
 ], EviewComponent);
 exports.EviewComponent = EviewComponent;
 //# sourceMappingURL=eview.component.js.map

@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
                 this.name = profile.facebook.displayName;
                 this.image = profile.facebook.image;
                 this.email = profile.facebook.email;
-                this.userId = profile.facebook._id;
+                this.userId = profile.facebook.id;
             },
             error => console.error('error ' + error),
             () => console.log('Completed!', this.profile)

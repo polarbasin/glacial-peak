@@ -122,8 +122,12 @@ export class EviewComponent {
     this.translateIds();
   }
   handleAttend() {
+<<<<<<< HEAD
     this.attEvent({id: this.userID, event: this.getData});
     this.onTestGet(this.id);
+=======
+    this.attEvent({id: this.name, event: this.getData});
+>>>>>>> [update] searches for events by user name
   }
   toggleChat() {
     if (this.showChat === true) {
