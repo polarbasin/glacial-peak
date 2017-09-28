@@ -68,7 +68,8 @@ app.route('/auth/facebook/callback')
 // post events to page
 app.route('/api/events')
   .get(handlers.getEvents)
-  .post(handlers.isAuthenticated, handlers.postEvent);
+  .post(handlers.postEvent);
+  // .post(handlers.isAuthenticated, handlers.postEvent);
 
 app.get('/profileInfo', (req, res) => {
   res.send(req.user);
