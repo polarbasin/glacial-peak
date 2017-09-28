@@ -33,7 +33,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="location">Event Location</label>  
           <div class="col-md-5">
-          <input id="imgUrl" name="imgUrl" type="text" placeholder="Location" class="form-control input-md">
+          <input id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
             
           </div>
         </div>
