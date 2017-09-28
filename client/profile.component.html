@@ -19,13 +19,14 @@
     <div class="container">
       <div class="events">
         <div class="row">
-          <div class="col-md-4" id="event" *ngFor="let event of events; let i = index" [hidden]="(!event.attending.includes(userId))">
+          <div class="col-md-4" id="event" *ngFor="let event of events; let i = index" [hidden]="(event.attending.includes(userId))">
             <div  class="details">
               <a target="_blank" href="{{event.link}}">
                 <h3>{{ event.title }}</h3>
               </a>
               <img src="{{ event.imgUrl }}"><br>
-              <a [routerLink]="['/eview/', event._id]">View this Event</a>
+              <button><a [routerLink]="['/eview/', event._id]">View this Event</a></button>
+              <button><a [routerLink]="['/reminder/', event._id]">Set Reminder </a></button>
             </div>
           </div>
         </div>
