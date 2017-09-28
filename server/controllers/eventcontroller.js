@@ -36,7 +36,6 @@ const sendNotification = (event) => {
 
 const saveEvent = event => {
   Event.findOrCreate({
-<<<<<<< HEAD
     title: event.title || '',
     location: event.location || '',
     author: event.author || '',
@@ -44,20 +43,7 @@ const saveEvent = event => {
     eventDate: event.eventDate || '',
     description: event.description || '',
     imgUrl: event.imgUrl || getImgUrl(event.description),
-<<<<<<< HEAD
     attending: event.attending || []
-=======
-    eventDate: event.eventDate,
->>>>>>> [Create] setNotification function, in progress
-=======
-    title: event.title,
-    location: event.location,
-    // author: event.author,
-    link: event.link,
-    eventDate: event.eventDate,
-    description: event.description,
-    imgUrl: event.imgUrl || getImgUrl(event.description),
->>>>>>> [fix] set SMS notification timing properly, 5PM day before
   }, (err, entry, created) => {
     if (err) {
       console.error('error saving event', err);
@@ -71,6 +57,7 @@ const saveEvent = event => {
       }
     }
   });
+  
   // var newEvent = new Event({
   //   title: event.title,
   //   link: event.link,
