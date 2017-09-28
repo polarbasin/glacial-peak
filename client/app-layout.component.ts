@@ -7,8 +7,7 @@ import { EventService } from './event.service';
 @Component({
   selector: 'app-layout',
   template:
-  `<div><a routerLink="/eview">View Event</a></div>
-  <div><login-button></login-button></div>
+  `<div><login-button></login-button></div>
     <div><add-event-button></add-event-button></div>
     <div class="col-md-12" id="header"><h1>BORED<span class="question">?</span></h1>
     <h4 class="subtitle">A local event aggregator</h4>
@@ -18,11 +17,11 @@ import { EventService } from './event.service';
         <div class="row">
           <div class="col-md-4" id="event" *ngFor="let event of events; let i = index">
             <div class="details">
-              <a target="_new" href="{{event.link}}">
+              <a target="_blank" href="{{event.link}}">
                 <h3>{{ event.title }}</h3>
               </a>
-              <img src="{{ event.imgUrl }}">
-              <a [routerLink]="['/eview/:id', event._id]">{{event._id}}</a>
+              <img src="{{ event.imgUrl }}"><br>
+              <a [routerLink]="['/eview/', event._id]">View this Event</a>
             </div>
           </div>
         </div>
