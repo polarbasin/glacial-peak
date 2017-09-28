@@ -26,7 +26,7 @@ import { ProfileButtonComponent }  from './profile-button.component';
     LoginButtonComponent,
     AddEventButtonComponent,
 
-    EviewComponent
+    EviewComponent,
 
     ProfileComponent,
     ProfileButtonComponent,
