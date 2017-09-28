@@ -23,7 +23,14 @@ import { EvindService } from './evind.service';
       <div class="eventDesc">{{eventDesc}}</div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
-        Event Chat Room
+        Event Chat Room<br>
+        <div id="chat-window">
+          <div id="output"></div>
+          <div id="feedback"></div>
+        </div>
+        <input id="handle" type="text" placeholder="Handle" />
+        <input id="message" type="text" placeholder="Message" />
+        <button id="send">Send</button>
       </div>
       <div class="entryBackLink"><a routerLink="/">Back</a></div>
     </div> `
