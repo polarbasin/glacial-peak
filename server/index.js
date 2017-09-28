@@ -99,15 +99,18 @@ app.get('/events', (req, res) => {
 // Get events by id
 app.get('/events/:id', (req, res) => {
   Event.findById(req.params.id, (err, event) => {
-   if (err) {
-     console.error(err);
-     return res.send(err);
-   } else {
-     res.json(event);
-   }
+    if (err) {
+      console.error(err);
+      return res.send(err);
+    } else {
+      res.json(event);
+    }
   });
 });
 
+//add user to event
+app.route('events/adduser')
+  .post(handlers.addToAttending);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
@@ -132,5 +135,5 @@ io.on('connection', (socket) => {
   socket.on('typing', (data) => {
     socket.broadcast.emit('typing', data);
   });
-})
+});
 

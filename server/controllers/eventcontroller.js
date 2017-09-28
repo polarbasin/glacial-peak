@@ -5,6 +5,35 @@ const getImgUrl = str => {
   return results ? results[2] : '../styles/placeholder.png';
 };
 
+const setNotification = (event) => {
+  if (!event.eventDate) {
+    return;
+  }
+  const timeArray = event.eventDate.split('-');
+  const year = parseInt(timeArray[0]);
+  const month = parseInt(timeArray[1]);
+  const day = parseInt(timeArray[2]);
+  const eventDate = new Date(year, month - 1, day);
+  const eventTimeMs = eventDate.valueOf();
+  const currentTimeMs = Date.now();
+  const timeUntilEvent = eventTimeMs - currentTimeMs;
+  // 1 hour in ms is 3600000
+  // system will notify user at 5PM day before event
+  const timeUntilNotification = timeUntilEvent - (3600000 * 7);
+  // if it is after 5PM day before event, immediately send notification
+  if (timeUntilNotification < 0) {
+    sendNotification(event);
+  } else {
+    //set to 5 PM day before event
+    setTimeout(sendNotification, timeUntilNotification, event);
+  }
+  console.log(`notification set for: ${timeUntilNotification / 3600000} hours from now`);
+};
+const sendNotification = (event) => {
+    console.log('notification sent:', event);
+    // twilio request to event.attendees;
+};
+
 const saveEvent = event => {
   Event.findOrCreate({
     title: event.title || '',
@@ -20,12 +49,15 @@ const saveEvent = event => {
       console.error('error saving event', err);
     } else {
       if (created) {
-        console.log('event successfully created', entry.title);
+        console.log('event successfully created', entry.title, entry.eventDate);
+        setNotification(entry);
       } else {
+        setNotification(entry);
         console.log('event already exists', entry.title);
       }
     }
   });
+  
   // var newEvent = new Event({
   //   title: event.title,
   //   link: event.link,

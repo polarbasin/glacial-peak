@@ -12,12 +12,10 @@ module.exports = {
     });
   },
   postEvent: (req, res) => {
-    console.log(req);
+    // console.log(req);
     let event = req.body;
     console.log('user', req.user);
     console.log('event', event);
-    event.attending = [];
-    // console.log(event);
     saveEvent(event);
     res.redirect('/');
   },
@@ -33,4 +31,24 @@ module.exports = {
     // if the user is not authenticated then redirect him to the login page
     res.redirect('/');
   },
+  addToAttending: (req, res) => {
+    if (!req.user) {
+      res.status(404).send('not logged in!');
+    } else { 
+
+      const profile = req.user;
+      const id = profile.facebook.id;
+      const event = req.body.event;
+      let currentAttending = req.body.event.attending;
+      Event.findOneAndUpdate({ where: { id: event.id }}, { attending: currentAttending.concat(id)}, (err, event) => {
+        if (err) {
+          console.log('error updating attending:', err);
+          res.status(404).send('not found or updated');
+        } else {
+          res.status(201).send(event);
+
+        }
+      });
+    }
+  }
 };
