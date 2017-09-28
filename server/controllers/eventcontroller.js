@@ -8,6 +8,8 @@ const getImgUrl = str => {
 const saveEvent = event => {
   Event.findOrCreate({
     title: event.title,
+    location: event.location,
+    author: event.author,
     link: event.link,
     description: event.description,
     imgUrl: event.imgUrl || getImgUrl(event.description),
