@@ -7,11 +7,7 @@ import 'rxjs/add/operator/map';
 export class EventService {
   public eventsUrl = 'api/events';  // URL to web api
   public events: any;
-<<<<<<< HEAD
   public profileUrl = 'profileInfo'; //URL to facebook api
-=======
-  public profileUrl = ''; //URL to facebook api
->>>>>>> Changed event service method in profile
   public profile: any;
 
   constructor(public http: Http) {
@@ -25,3 +21,4 @@ export class EventService {
 
  
 }
+

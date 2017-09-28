@@ -13,9 +13,13 @@ const event_service_1 = require('./event.service');
 let ProfileComponent = class ProfileComponent {
     constructor(eventService) {
         this.eventService = eventService;
-        eventService.profile.subscribe(profile => this.profile = profile, error => console.error('error ' + error), () => console.log('Completed!'));
     }
     ngOnInit() {
+        this.eventService.profile.subscribe((profile) => {
+            this.profile = profile;
+            this.name = profile.facebook.displayName;
+            this.image = profile.facebook.image;
+        }, error => console.error('error ' + error), () => console.log('Completed!', this.profile));
         console.log('Profile Initialized!');
     }
 };
@@ -28,10 +32,10 @@ ProfileComponent = __decorate([
       <div class="fb-profile">
       <div >    
       <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
-          <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
+          <img align="left" class="fb-image-profile thumbnail" src={{image}} alt="Profile image example"/>
          
       </div>
-      <h1>Eli Macy</h1>
+      <h1>{{name}}</h1>
      
   </div> <!-- /container -->  
   
@@ -47,7 +51,8 @@ ProfileComponent = __decorate([
    
 
   `,
-        styleUrls: ['profile.component.css']
+        styleUrls: ['profile.component.css'],
+        providers: [event_service_1.EventService]
     }), 
     __metadata('design:paramtypes', [event_service_1.EventService])
 ], ProfileComponent);
