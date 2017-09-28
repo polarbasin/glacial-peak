@@ -104,10 +104,12 @@ export class EviewComponent {
       console.log('Request complete');
     });
   }
+  translateIds() {
+
+  }
   ngOnInit() {
     this.onTestGet(this.id);
     this.eventService.profile.subscribe(profile => {
-      console.log(profile);
       this.userID = profile.facebook.id;
       this.profile = profile;
       this.name = profile.facebook.displayName;
@@ -117,9 +119,11 @@ export class EviewComponent {
     }, () => {
       console.log('complete');
     })
+    this.translateIds();
   }
   handleAttend() {
     this.attEvent({id: this.userID, event: this.getData});
+    this.onTestGet(this.id);
   }
   toggleChat() {
     if (this.showChat === true) {
