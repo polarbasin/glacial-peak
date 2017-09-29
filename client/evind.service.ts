@@ -20,4 +20,24 @@ export class EvindService {
         return res.json();
       });
   }
+
+  getMessages() {
+    return this._http.get('messages')
+    .map(res => {
+      return res.json();
+    })
+  }
+
+  postMessage(message) {
+    return this._http.post('messages', message)
+      .map(res => {
+        return res.json();
+      })
+  }
+  postEvent(event) {
+    return this._http.post('api/events/', event)
+      .map(res => {
+        return res;
+      })
+  }
 }

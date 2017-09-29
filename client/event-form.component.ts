@@ -1,10 +1,12 @@
 // template for event-form. No functionality added to event services.
 import { Component } from '@angular/core';
-
+import { FormGroup, FormControl} from '@angular/forms';
+import { EvindService } from './evind.service';
 @Component({
     selector: 'event-form',
+    providers: [EvindService],
     template: `
-      <form class="form-horizontal" action="/api/events" method="post">
+      <form [formGroup]="form" (ngSubmit)="postEvent()" class="form-horizontal" action="/api/events" method="post">
         <fieldset>
 
         <!-- Form Name -->
@@ -15,7 +17,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="title">Event Name</label>  
           <div class="col-md-5">
-          <input id="title" name="title" type="text" placeholder="My event" class="form-control input-md">
+          <input formControlName="title" id="title" name="title" type="text" placeholder="My event" class="form-control input-md">
             
           </div>
         </div>
@@ -24,7 +26,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="eventDate">Event Date</label>  
           <div class="col-md-5">
-          <input id="eventDate" name="eventDate" type="date" placeholder="" class="form-control input-md">
+          <input formControlName="eventDate" id="eventDate" name="eventDate" type="date" placeholder="" class="form-control input-md">
             
           </div>
         </div>
@@ -33,7 +35,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="location">Event Location</label>  
           <div class="col-md-5">
-          <input id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
+          <input formControlName="location" id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
             
           </div>
         </div>
@@ -42,7 +44,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="description">Description</label>
           <div class="col-md-3">                     
-            <textarea class="form-control" id="description" placeholder="..." name="description"></textarea>
+            <textarea formControlName="description" class="form-control" id="description" placeholder="..." name="description"></textarea>
           </div>
         </div>
 
@@ -50,7 +52,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="link">Event Link</label>  
           <div class="col-md-5">
-          <input id="link" name="link" type="text" placeholder="www.event.com" class="form-control input-md">
+          <input formControlName="link" id="link" name="link" type="text" placeholder="www.event.com" class="form-control input-md">
             
           </div>
         </div>
@@ -59,7 +61,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="imgUrl">Image Link</label>  
           <div class="col-md-5">
-          <input id="imgUrl" name="imgUrl" type="text" placeholder="www.event.com/picture.jpg" class="form-control input-md">
+          <input formControlName="imgUrl" id="imgUrl" name="imgUrl" type="text" placeholder="www.event.com/picture.jpg" class="form-control input-md">
             
           </div>
         </div>
@@ -69,7 +71,7 @@ import { Component } from '@angular/core';
         <div class="form-group">
           <label class="col-md-4 control-label" for="submit"></label>
           <div class="col-md-4">
-            <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+            <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>
 
@@ -77,4 +79,30 @@ import { Component } from '@angular/core';
       </form>` 
 })
 
-export class EventFormComponent { }
+export class EventFormComponent {
+   form = new FormGroup({
+    title: new FormControl(),
+    location: new FormControl(),
+    link: new FormControl(),
+    eventDate: new FormControl(),
+    description: new FormControl(),
+    imgUrl: new FormControl(),
+  });
+   constructor(private _httpService: EvindService) {
+
+   }
+  postEvent() {
+    let eventToSend = {
+      title: this.form.value.title,
+      location: this.form.value.location,
+      link: this.form.value.link,
+      eventDate: this.form.value.eventDate,
+      description: this.form.value.description,
+      imgUrl: this.form.value.imgUrl
+    }
+    console.log(eventToSend);
+    this._httpService.postEvent(eventToSend).subscribe((res) => {
+      console.log('event posted');
+    })
+  }
+ }

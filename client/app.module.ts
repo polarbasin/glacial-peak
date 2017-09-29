@@ -12,9 +12,6 @@ import { EviewComponent }          from './eview.component';
 import { APP_ROUTES_PROVIDER }     from './app.routes';
 import { ProfileComponent }        from './profile.component';
 import { ProfileButtonComponent }  from './profile-button.component';
-// import { FormGroup }               from '@angular/forms';
-// import { FormControl }             from '@angular/forms';
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -22,8 +19,6 @@ import { ProfileButtonComponent }  from './profile-button.component';
     JsonpModule,
     FormsModule,
     ReactiveFormsModule
-    // FormGroup,
-    // FormControl
   ],
   declarations: [ 
     AppComponent, 

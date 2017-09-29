@@ -1,6 +1,6 @@
 const Event = require('../models/Event.js');
+const Message = require('../models/Message');
 const saveEvent = require('../controllers/eventcontroller');
-const passport = require('passport');
 
 module.exports = {
   getEvents: (req, res) => {
@@ -48,5 +48,31 @@ module.exports = {
         }
       });
     }
+  },
+  addMessage: (req, res, next) => {
+    console.log(req.body);
+    let incomingMessage = req.body;
+    Message.create({
+      handle: incomingMessage.handle,
+      message: incomingMessage.message,
+      event: incomingMessage.event,
+    }, (err, message) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('error posting message');
+      } else {
+        res.status(201).send(message);
+      }
+    });
+  },
+  getMessages: (req, res) => {
+    Message.find({}, (err, messages) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('error getting messages');
+      } else {
+        res.status(200).send(messages);
+      }
+    });
   }
 };
