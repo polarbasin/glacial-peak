@@ -68,6 +68,6 @@ function sendNotifications(appointments) {
 }
 };  
 
-const Appointment = mongoose.model('Event', AppointmentSchema);
+const Appointment = mongoose.model('Appointment', AppointmentSchema);
 
 module.exports = Appointment;
