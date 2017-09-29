@@ -10,13 +10,10 @@ const rss = require('./rss.js');
 const fbAuth = require('./config/facebook_passport');
 // const socket = require('socket.io');
 const path = require('path');
-<<<<<<< HEAD
 const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const router = new express.Router();
-require('dotenv').config();
-=======
->>>>>>> [Create] message post on event page
+
 require('./dbConnect');
 require('./config/passport')(passport);
 
