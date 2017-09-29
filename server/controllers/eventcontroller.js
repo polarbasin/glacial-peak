@@ -43,8 +43,8 @@ const saveEvent = event => {
     eventDate: event.eventDate || '',
     description: event.description || '',
     imgUrl: event.imgUrl || getImgUrl(event.description),
-    attending: event.attending || []
-  }, (err, entry, created) => {
+    
+  }, { attending: event.attending || [], }, (err, entry, created) => {
     if (err) {
       console.error('error saving event', err);
     } else {
