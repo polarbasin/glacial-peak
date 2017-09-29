@@ -24,6 +24,10 @@ client/rxjs-operators.js
 client/rxjs-operators.js.map
 client/datatypes/event.js
 client/datatypes/event.js.map
+client/eview.component.js
+client/eview.component.js.map
+client/profile.component.js
+client/profile.component.js.map
 
 ### node etc ###
 read.txt
