@@ -35,7 +35,8 @@ module.exports = {
   addToAttending: (req, res) => {
     // console.log('made it', req.body);
     // res.status(201).send(req.body);
-      const id = req.body.id;
+      console.log('req body', req.body);
+      const id = req.body.name;
       const event = req.body.event;
       let currentAttending = req.body.event.attending;
       Event.findOneAndUpdate({ title: event.title }, { attending: currentAttending.concat(id)}, (err, event) => {
