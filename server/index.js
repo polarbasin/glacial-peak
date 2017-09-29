@@ -18,8 +18,12 @@ require('./dbConnect');
 require('./config/passport')(passport);
 
 // Models
+
 const Event = require('../server/models/Event');
 const Appointment = require('../server/models/Appointment');
+
+const Message = require('./models/Message');
+
 
 app.use(morgan('dev'));
 
@@ -207,7 +211,6 @@ app.get('/events/:id', (req, res) => {
 
 //add user to event
 app.post('/adduser', handlers.addToAttending);
-  // .post(handlers.addToAttending);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
@@ -224,9 +227,34 @@ const io = socket(server);
 io.on('connection', (socket) => {
   console.log('made socket connection');
   console.log('socket', socket.id);
-
+  socket.on('open', (data) => {
+    Message.find({ event: data.event }, (err, messages) => {
+      if (err) {
+        console.log(err);
+      } else {
+        messages.forEach((message) => {
+          const messageToSend = {
+            handle: message.handle,
+            message: message.message,
+            event: message.event,
+          };
+          socket.emit('chat', messageToSend);
+        });
+      }
+    });
+  });
   socket.on('chat', (data) => {
-    io.sockets.emit('chat', data);
+    Message.create({
+      handle: data.handle,
+      message: data.message,
+      event: data.event
+    }, (err, message) => {
+      if (err) {
+        console.log(err);
+      } else {
+        io.sockets.emit('chat', data);
+      }
+    });
   });
 
   socket.on('typing', (data) => {

@@ -1,3 +1,26 @@
+h2{
+    color: #111111;
+    font-family: monaco, Consolas, "Lucida Console", monospace;
+    background-color: white;
+    min-height: 1em;
+    font-size: 3em; 
+    font-weight: bold;
+    letter-spacing: -1px; 
+    line-height: 1em; 
+    text-align: center;
+    border-radius: 1px;
+    z-index: 100;
+    position: absolute;
+    -webkit-box-shadow: 0 10px 10px black;
+    -moz-box-shadow: 0 10px 10px black;
+    box-shadow: 0 10px 10px black;
+    -webkit-transform: rotate(-4deg);
+    -moz-transform: rotate(-4deg);
+    -o-transform: rotate(-4deg);
+    -ms-transform: rotate(-4deg);
+    transform: rotate(-4deg);
+}
+
 #profileHeader{
     padding-top: 10px; 
     position: absolute;
@@ -10,7 +33,7 @@
 
 .move {
     position: absolute;
-    top: 500px;
+    top: 550px;
     left: 125px;
 }
 
