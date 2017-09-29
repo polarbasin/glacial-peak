@@ -12,13 +12,6 @@ import { EviewComponent }          from './eview.component';
 import { APP_ROUTES_PROVIDER }     from './app.routes';
 import { ProfileComponent }        from './profile.component';
 import { ProfileButtonComponent }  from './profile-button.component';
-<<<<<<< HEAD
-// import { FormGroup }               from '@angular/forms';
-// import { FormControl }             from '@angular/forms';
-
-=======
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
->>>>>>> [Create] message post on event page
 @NgModule({
   imports: [
     BrowserModule,
@@ -26,11 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     JsonpModule,
     FormsModule,
     ReactiveFormsModule
-<<<<<<< HEAD
-    // FormGroup,
-    // FormControl
-=======
->>>>>>> [Create] message post on event page
   ],
   declarations: [ 
     AppComponent, 

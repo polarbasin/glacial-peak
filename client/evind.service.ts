@@ -34,4 +34,10 @@ export class EvindService {
         return res.json();
       })
   }
+  postEvent(event) {
+    return this._http.post('api/events/', event)
+      .map(res => {
+        return res;
+      })
+  }
 }

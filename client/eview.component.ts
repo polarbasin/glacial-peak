@@ -92,8 +92,8 @@ export class EviewComponent {
   userID: string;
   messages: any[];
   form = new FormGroup({
-    handle: new FormControl('handle'),
-    message: new FormControl('message'),
+    handle: new FormControl(),
+    message: new FormControl(),
   })
 
 
@@ -147,15 +147,9 @@ export class EviewComponent {
     }, () => {
       console.log('complete');
     })
-    this.translateIds();
+    
 
-    // this._httpService.getMessages().subscribe((messages) => {
-    //   this.messages = messages;
-    // }, (err) => {
-    //   console.log(err);
-    // }, () => {
-    //   console.log('messages received,', this.messages);
-    // })
+    
   }
   handleAttend() {
     if (this.name) {
@@ -173,6 +167,7 @@ export class EviewComponent {
     } else {
       this.showChat = true;
       this.showChatText = 'Hide event chat room';
+      this.getMessages();
     }
   }
   notiForm() {
@@ -183,7 +178,18 @@ export class EviewComponent {
     }
   }
 
-  
+  getMessages() {
+    this._httpService.getMessages().subscribe((messages) => {
+      let mapped = messages.filter((message) => {
+        return message.event === this.eventName;
+      })
+      this.messages = mapped;
+    }, (err) => {
+      console.log(err);
+    }, () => {
+      console.log('messages received,', this.messages);
+    })
+  }
   
   postMessage() {
     console.log(this.form.get('handle'), this.form.get('name'));
@@ -192,6 +198,7 @@ export class EviewComponent {
       message: this.form.value.message,
       event: this.eventName,
     }
+    this.messages.push(messageToSend);
       this._httpService.postMessage(messageToSend).subscribe(() => {
       console.log('Successful POST request');
     }, error => {
