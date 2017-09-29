@@ -51,6 +51,13 @@ import { EventService } from './event.service';
         <div class="attendlist"></div>
         <button (click)="handleAttend()">I'm interested in this event!</button>
       </div>
+      <div class="notification">
+        <button (click)="notiForm()">Enable Notifications for this Event</button>
+        <div id="notiForm" *ngIf="shownotiForm">
+        Enter the phone number for which you would like to receive SMS notifications:<br>
+        <input id="phonenumber" type="text" placeholder="Phone Number" /> <button id="phonesend">Submit</button>
+        </div>
+      </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
       <div *ngIf="showChat">
         <div id="chatroom">
@@ -82,6 +89,7 @@ export class EviewComponent {
   attending: string[];
   showChatText: string;
   showChat: boolean;
+  shownotiForm: boolean;
   getData: any;
   profile: any;
   name: string;
@@ -92,6 +100,7 @@ export class EviewComponent {
     this.id = route.snapshot.params['id'];
     this.showChatText = 'Go to event chat room';
     this.showChat = false;
+    this.shownotiForm = false;
     // this.eventName = this.getData.title;
     // this.eventDate = 'Friday, September 29th, 2017 5:00PM';
     // this.eventLocation = 'Operation Spark - 748 Camp St New Orleans, LA 70130';
@@ -155,6 +164,13 @@ export class EviewComponent {
     } else {
       this.showChat = true;
       this.showChatText = 'Hide event chat room';
+    }
+  }
+  notiForm() {
+    if (this.shownotiForm === true) {
+      this.shownotiForm = false;
+    } else {
+      this.shownotiForm = true;
     }
   }
 }
