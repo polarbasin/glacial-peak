@@ -26,6 +26,9 @@ import { EventService } from './event.service';
       <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
       <div class="attending">
         <b>People Attending this Event:</b>
+         <ul>
+           <li *ngFor="let person of attending">{{person}}</li>
+         </ul>
         <div class="attendlist"></div>
         <button (click)="handleAttend()">I'm interested in this event!</button>
       </div>
@@ -46,7 +49,7 @@ import { EventService } from './event.service';
     </div> `
 })
 
-export class EviewComponent { 
+export class EviewComponent {
 
   id: string;
   eventDate: string;
@@ -104,12 +107,10 @@ export class EviewComponent {
       console.log('Request complete');
     });
   }
-  translateIds() {
-
-  }
   ngOnInit() {
     this.onTestGet(this.id);
     this.eventService.profile.subscribe(profile => {
+      console.log(profile);
       this.userID = profile.facebook.id;
       this.profile = profile;
       this.name = profile.facebook.displayName;
@@ -119,10 +120,9 @@ export class EviewComponent {
     }, () => {
       console.log('complete');
     })
-    this.translateIds();
   }
   handleAttend() {
-    this.attEvent({id: this.userID, event: this.getData});
+    this.attEvent({ name: this.name, event: this.getData });
     this.onTestGet(this.id);
   }
   toggleChat() {
