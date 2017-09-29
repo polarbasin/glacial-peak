@@ -8,12 +8,15 @@ const session = require('express-session');
 const handlers = require('./handlers');
 const rss = require('./rss.js');
 const fbAuth = require('./config/facebook_passport');
-const socket = require('socket.io');
+// const socket = require('socket.io');
 const path = require('path');
+<<<<<<< HEAD
 const momentTimeZone = require('moment-timezone');
 const moment = require('moment');
 const router = new express.Router();
 require('dotenv').config();
+=======
+>>>>>>> [Create] message post on event page
 require('./dbConnect');
 require('./config/passport')(passport);
 
@@ -212,6 +215,11 @@ app.get('/events/:id', (req, res) => {
 //add user to event
 app.post('/adduser', handlers.addToAttending);
 
+// Add to message board
+app.post('/messages', handlers.addMessage);
+
+app.get('/messages', handlers.getMessages);
+
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
@@ -221,44 +229,47 @@ const server = app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
 
-// Socket
-const io = socket(server);
 
-io.on('connection', (socket) => {
-  console.log('made socket connection');
-  console.log('socket', socket.id);
-  socket.on('open', (data) => {
-    Message.find({ event: data.event }, (err, messages) => {
-      if (err) {
-        console.log(err);
-      } else {
-        messages.forEach((message) => {
-          const messageToSend = {
-            handle: message.handle,
-            message: message.message,
-            event: message.event,
-          };
-          socket.emit('chat', messageToSend);
-        });
-      }
-    });
-  });
-  socket.on('chat', (data) => {
-    Message.create({
-      handle: data.handle,
-      message: data.message,
-      event: data.event
-    }, (err, message) => {
-      if (err) {
-        console.log(err);
-      } else {
-        io.sockets.emit('chat', data);
-      }
-    });
-  });
 
-  socket.on('typing', (data) => {
-    socket.broadcast.emit('typing', data);
-  });
-});
+
+// Socket (Eventually...)
+// const io = socket(server);
+
+// io.on('connection', (socket) => {
+//   console.log('made socket connection');
+//   console.log('socket', socket.id);
+//   socket.on('open', (data) => {
+//     Message.find({ event: data.event }, (err, messages) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         messages.forEach((message) => {
+//           const messageToSend = {
+//             handle: message.handle,
+//             message: message.message,
+//             event: message.event,
+//           };
+//           socket.emit('chat', messageToSend);
+//         });
+//       }
+//     });
+//   });
+//   socket.on('chat', (data) => {
+//     Message.create({
+//       handle: data.handle,
+//       message: data.message,
+//       event: data.event
+//     }, (err, message) => {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         io.sockets.emit('chat', data);
+//       }
+//     });
+//   });
+
+//   socket.on('typing', (data) => {
+//     socket.broadcast.emit('typing', data);
+//   });
+// });
 

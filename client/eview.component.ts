@@ -45,22 +45,30 @@ import { FormControl } from '@angular/forms';
           </form>
         </div>
       </div>
-      <button (click)="toggleChat()">{{showChatText}}</button>
-      <div *ngIf="showChat">
-        <div id="chatroom">
-          <div class="chatheader">Event Chat Room</div><br>
-          <div id="chat-window">
-            <div id="output"></div>
-            <div id="feedback"></div>
-          </div>
-          <input id="handle" type="text" placeholder="Handle" />
-          <input id="message" type="text" placeholder="Message" />
-          <button id="send">Send</button>
-        </div>
-      </div>
-      <div class="entryBackLink"><a routerLink="/">Back</a></div>
-    </div> `
 
+  <button (click)="toggleChat()">{{showChatText}}</button>
+  <div *ngIf="showChat">
+    <div id="chatroom">
+      <div class="chatheader">Event Chat Room</div><br>
+        <div id="chat-window">
+          <div id="output">
+          <ul>
+            <li *ngFor="let message of messages">
+              <b>{{message.handle}}</b>: {{message.message}}
+            </li>
+          </ul>
+          </div>
+          <div id="feedback"></div>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="postMessage()">
+          <input formControlName="handle" placeholder="Handle">
+          <input formControlName="message" placeholder="Message">
+          <button type="submit">Send</button>
+        </form>
+      </div>
+  </div>
+  <div class="entryBackLink"><a routerLink="/">Back</a></div>
+</div> `
 })
 
 export class EviewComponent {
@@ -82,6 +90,13 @@ export class EviewComponent {
   name: string;
   image: string;
   userID: string;
+  messages: any[];
+  form = new FormGroup({
+    handle: new FormControl('handle'),
+    message: new FormControl('message'),
+  })
+
+
 
   appointment = new FormGroup({
     phoneNumber: new FormControl('phoneNumber')
@@ -131,7 +146,16 @@ export class EviewComponent {
       console.error(error);
     }, () => {
       console.log('complete');
-    });
+    })
+    this.translateIds();
+
+    // this._httpService.getMessages().subscribe((messages) => {
+    //   this.messages = messages;
+    // }, (err) => {
+    //   console.log(err);
+    // }, () => {
+    //   console.log('messages received,', this.messages);
+    // })
   }
   handleAttend() {
     if (this.name) {
@@ -158,4 +182,23 @@ export class EviewComponent {
       this.shownotiForm = true;
     }
   }
+
+  
+  
+  postMessage() {
+    console.log(this.form.get('handle'), this.form.get('name'));
+    let messageToSend = {
+      handle: this.form.value.handle,
+      message: this.form.value.message,
+      event: this.eventName,
+    }
+      this._httpService.postMessage(messageToSend).subscribe(() => {
+      console.log('Successful POST request');
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('Request complete');
+    });
+  }
+  
 }
