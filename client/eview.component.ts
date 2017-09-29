@@ -32,25 +32,6 @@ import { EventService } from './event.service';
     <div class="attendlist"></div>
     <button (click)="handleAttend()">I'm interested in this event!</button>
   </div>
-  <button (click)="toggleChat()">{{showChatText}}</button>
-  <div *ngIf="showChat">
-    <div id="chatroom">
-      <div class="chatheader">Event Chat Room</div><br>
-      <div id="chat-window">
-        <div id="output"></div>
-        <div id="feedback"></div>
-      </div>
-
-      <div class="eventDesc">{{eventDesc}}</div>
-      <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
-      <div class="attending">
-        <b>People Attending this Event:</b>
-         <ul>
-           <li *ngFor="let person of attending">{{person}}</li>
-         </ul>
-        <div class="attendlist"></div>
-        <button (click)="handleAttend()">I'm interested in this event!</button>
-      </div>
       <div class="notification">
         <button (click)="notiForm()">Enable Notifications for this Event</button>
         <div id="notiForm" *ngIf="shownotiForm">
