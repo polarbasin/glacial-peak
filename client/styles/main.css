@@ -87,7 +87,7 @@ h1 {
   overflow: hidden;
 }
 
-img {
+img:not(.fb-image-lg) {
   max-width: 225px;
   max-height: 175px;
   float: bottom;

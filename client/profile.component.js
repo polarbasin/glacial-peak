@@ -10,44 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const event_service_1 = require('./event.service');
+const common_1 = require('@angular/common');
 let ProfileComponent = class ProfileComponent {
     constructor(eventService) {
         this.eventService = eventService;
-        eventService.events.subscribe(profile => this.profile = profile, error => console.error('error ' + error), () => console.log('Completed!'));
     }
     ngOnInit() {
+        this.eventService.events.subscribe(events => this.events = events, error => console.error('error ' + error), () => console.log(this.events[0]));
+        this.eventService.profile.subscribe((profile) => {
+            this.profile = profile;
+            this.name = profile.facebook.displayName;
+            this.image = profile.facebook.image;
+            this.email = profile.facebook.email;
+            this.userId = profile.facebook.id;
+        }, error => console.error('error ' + error), () => console.log('Completed!', this.profile));
         console.log('Profile Initialized!');
     }
 };
 ProfileComponent = __decorate([
     core_1.Component({
         selector: 'profile',
-        template: `
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <div id=profileHeader>
-      <div class="fb-profile">
-      <div >    
-      <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
-          <img align="left" class="fb-image-profile thumbnail" src="http://lorempixel.com/180/180/people/9/" alt="Profile image example"/>
-         
-      </div>
-      <h1>Eli Macy</h1>
-     
-  </div> <!-- /container -->  
-  
-  <div class="move">
-  <div>
-  <h3>DOB:</h3>
-  <h3>City:</h3>
-  <h3>Job:</h3>
-  
-  </div>
-  
-  </div>
-   
-
-  `,
-        styleUrls: ['profile.component.css']
+        templateUrl: './profile.component.html',
+        styleUrls: ['profile.component.css'],
+        providers: [event_service_1.EventService],
+        directives: [common_1.NgFor, common_1.NgIf]
     }), 
     __metadata('design:paramtypes', [event_service_1.EventService])
 ], ProfileComponent);
