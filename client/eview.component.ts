@@ -110,7 +110,6 @@ export class EviewComponent {
   ngOnInit() {
     this.onTestGet(this.id);
     this.eventService.profile.subscribe(profile => {
-      console.log(profile);
       this.userID = profile.facebook.id;
       this.profile = profile;
       this.name = profile.facebook.displayName;
@@ -122,8 +121,10 @@ export class EviewComponent {
     })
   }
   handleAttend() {
-    this.attEvent({ name: this.name, event: this.getData });
-    this.onTestGet(this.id);
+    if (this.name) {
+      this.attEvent({ name: this.name, event: this.getData });
+      this.onTestGet(this.id);
+    }
   }
   toggleChat() {
     if (this.showChat === true) {
