@@ -40,4 +40,10 @@ export class EvindService {
         return res;
       })
   }
+  sendMessage(notif) {
+    return this._http.post('texttwilio/', notif)
+      .map(res => {
+        return res;
+      })
+  }
 }

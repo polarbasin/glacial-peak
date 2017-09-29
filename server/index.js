@@ -103,23 +103,10 @@ const getTimeZones = () => {
 
 // Twilio
 app.post('/texttwilio', (req, res) => {
-  // client.sendMessage({
-  //   to: '+5042584616',
-  //   from: process.env.TWILIO_PHONE_NUMBER,
-  //   body: 'Hello World from twilio'
-  // }, (err, data) => {
-  //   if (err) {
-  //     console.error(err);
-  //   } else {
-  //     console.log(data);
-  //   }
-  // }
-  // );
-
   client.messages.create({
     to: '+15042584616',
     from: process.env.TWILIO_PHONE_NUMBER,
-    body: 'Hello World from twilio'
+    body: req.body.message
   }).then((msg, err) => {
     if (err) {
       console.err(err);

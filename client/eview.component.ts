@@ -35,16 +35,7 @@ import { FormControl } from '@angular/forms';
     <div class="attendlist"></div>
     <button (click)="handleAttend()">I'm interested in this event!</button>
   </div>
-      <div class="notification">
-        <button (click)="notiForm()">Enable Notifications for this Event</button>
-        <div id="notiForm" *ngIf="shownotiForm">
-          <form [formGroup]="appointment" (ngSubmit)="newAppt(appointment.value)">
-            Enter the phone number for which you would like to receive SMS notifications:<br>
-            <input formControlName="phoneNumber" type="text" placeholder="Phone Number"/> 
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
+    </div>
 
   <button (click)="toggleChat()">{{showChatText}}</button>
   <div *ngIf="showChat">
@@ -67,8 +58,7 @@ import { FormControl } from '@angular/forms';
         </form>
       </div>
   </div>
-  <div class="entryBackLink"><a routerLink="/">Back</a></div>
-</div> `
+  <div class="entryBackLink"><a routerLink="/">Back</a></div>`
 })
 
 export class EviewComponent {
@@ -146,15 +136,25 @@ export class EviewComponent {
       console.error(error);
     }, () => {
       console.log('complete');
-    })
-    
-
-    
+    }) 
+  }
+  sendMessage(msg) {
+    this._httpService.sendMessage(msg).subscribe(() => {
+      console.log('Successful request');
+      console.log('msg');
+    }, error => {
+      console.error(error);
+    }, () => {
+      console.log('Request complete');
+    });
   }
   handleAttend() {
     if (this.name) {
       this.attEvent({ name: this.name, event: this.getData });
       this.onTestGet(this.id);
+      const msg = `Remember the event: ${this.eventName}, on ${this.eventDate} at ${this.eventLocation}`;
+      const message = {message: msg};
+      this.sendMessage(message);
     }
   }
   getDate(event) {
