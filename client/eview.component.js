@@ -59,10 +59,11 @@ let EviewComponent = class EviewComponent {
             console.log('Request complete');
         });
     }
+    translateIds() {
+    }
     ngOnInit() {
         this.onTestGet(this.id);
         this.eventService.profile.subscribe(profile => {
-            console.log(profile);
             this.userID = profile.facebook.id;
             this.profile = profile;
             this.name = profile.facebook.displayName;
@@ -72,9 +73,13 @@ let EviewComponent = class EviewComponent {
         }, () => {
             console.log('complete');
         });
+        this.translateIds();
     }
     handleAttend() {
-        this.attEvent({ id: this.name, event: this.getData });
+        if (this.name) {
+            this.attEvent({ name: this.name, event: this.getData });
+            this.onTestGet(this.id);
+        }
     }
     toggleChat() {
         if (this.showChat === true) {
@@ -91,38 +96,41 @@ EviewComponent = __decorate([
     core_1.Component({
         selector: 'eview',
         // directives: [ROUTER_DIRECTIVES],
-        providers: [evind_service_1.EvindService],
+        providers: [evind_service_1.EvindService, event_service_1.EventService],
         template: `
-    <div id="eventview">
-      <div class="eventHeader">{{eventName}}</div>
-      <div class="eventPict"><img src={{eventPict}}></div>
-      <div class="eventLink"><a href={{eventLink}} target="_blank">View More Info</a></div>
-      <div class="eventInfo">
-        <span class="eventDate"><b>Date:</b> {{eventDate}}</span><br>
-        <span class="eventLocation"><b>Location:</b> {{eventLocation}}</span>
+  <div id="eventview">
+  <div class="eventHeader">{{eventName}}</div>
+  <div class="eventPict"><img src={{eventPict}}></div>
+  <div class="eventLink"><a href={{eventLink}} target="_blank">View More Info</a></div>
+  <div class="eventInfo">
+    <span class="eventDate"><b>Date:</b> {{eventDate}}</span><br>
+    <span class="eventLocation"><b>Location:</b> {{eventLocation}}</span>
+  </div>
+  <div class="eventDesc">{{eventDesc}}</div>
+  <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
+  <div class="attending">
+    <b>People Attending this Event:</b>
+     <ul>
+       <li *ngFor="let person of attending">{{person}}</li>
+     </ul>
+    <div class="attendlist"></div>
+    <button (click)="handleAttend()">I'm interested in this event!</button>
+  </div>
+  <button (click)="toggleChat()">{{showChatText}}</button>
+  <div *ngIf="showChat">
+    <div id="chatroom">
+      <div class="chatheader">Event Chat Room</div><br>
+      <div id="chat-window">
+        <div id="output"></div>
+        <div id="feedback"></div>
       </div>
-      <div class="eventDesc">{{eventDesc}}</div>
-      <div class="postedBy"><b>Event Posted By:</b> {{eventPostBy}}</div>
-      <div class="attending">
-        <b>People Attending this Event:</b>
-        <div class="attendlist"></div>
-        <button (click)="handleAttend()">I'm interested in this event!</button>
-      </div>
-      <button (click)="toggleChat()">{{showChatText}}</button>
-      <div *ngIf="showChat">
-        <div id="chatroom">
-          <div class="chatheader">Event Chat Room</div><br>
-          <div id="chat-window">
-            <div id="output"></div>
-            <div id="feedback"></div>
-          </div>
-          <input id="handle" type="text" placeholder="Handle" />
-          <input id="message" type="text" placeholder="Message" />
-          <button id="send">Send</button>
-        </div>
-      </div>
-      <div class="entryBackLink"><a routerLink="/">Back</a></div>
-    </div> `
+      <input id="handle" type="text" placeholder="Handle" />
+      <input id="message" type="text" placeholder="Message" />
+      <button id="send">Send</button>
+    </div>
+  </div>
+  <div class="entryBackLink"><a routerLink="/">Back</a></div>
+</div> `
     }), 
     __metadata('design:paramtypes', [router_1.ActivatedRoute, evind_service_1.EvindService, event_service_1.EventService])
 ], EviewComponent);

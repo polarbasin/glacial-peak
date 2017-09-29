@@ -35,18 +35,18 @@ module.exports = {
   addToAttending: (req, res) => {
     // console.log('made it', req.body);
     // res.status(201).send(req.body);
-      console.log('req body', req.body);
-      const id = req.body.name;
-      const event = req.body.event;
-      let currentAttending = req.body.event.attending;
-      Event.findOneAndUpdate({ title: event.title }, { attending: currentAttending.concat(id)}, (err, event) => {
+    const name = req.body.name;
+    const event = req.body.event;
+    let currentAttending = req.body.event.attending;
+    if (currentAttending.indexOf(name) === -1) {
+      Event.findOneAndUpdate({ title: event.title }, { attending: currentAttending.concat(name) }, (err, event) => {
         if (err) {
           console.log('error updating attending:', err);
           res.status(404).send('not found or updated');
         } else {
           res.status(201).send(event);
-
         }
       });
+    }
   }
 };
