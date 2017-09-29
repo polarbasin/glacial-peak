@@ -35,8 +35,8 @@ import { FormControl } from '@angular/forms';
     <div class="attendlist"></div>
     <button (click)="handleAttend()">I'm interested in this event!</button>
   </div>
-    </div>
-
+      
+<div>
   <button (click)="toggleChat()">{{showChatText}}</button>
   <div *ngIf="showChat">
     <div id="chatroom">
@@ -57,6 +57,7 @@ import { FormControl } from '@angular/forms';
           <button type="submit">Send</button>
         </form>
       </div>
+    </div>
   </div>
   <div class="entryBackLink"><a routerLink="/">Back</a></div>`
 })
@@ -167,39 +168,8 @@ export class EviewComponent {
     const day = parseInt(timeArray[2]);
     const eventDate = new Date(year, month - 1, day);
     console.log(eventDate);
-    // const eventTimeMs = eventDate.valueOf();
-    // const currentTimeMs = Date.now();
-    // const timeUntilEvent = eventTimeMs - currentTimeMs;
-    // // 1 hour in ms is 3600000
-    // // system will notify user at 5PM day before event
-    // const timeUntilNotification = timeUntilEvent - (3600000 * 7);
-    // // if it is after 5PM day before event, immediately send notification
-    // if (timeUntilNotification < 0) {
-    //   sendNotification(event);
-    // } else {
-    //   //set to 5 PM day before event
-    //   setTimeout(sendNotification, timeUntilNotification, event);
-    // }
-    // console.log(`notification set for: ${timeUntilNotification / 3600000} hours from now`);
   }
-  newAppt() {
-    console.log(this.appointment.get('phoneNumber').value);
-    console.log(this.getData);
-    console.log(this.getDate(this.getData));
-    // const phone = this.appointment.get('phoneNumber').value;
-    // const apptObj = {
-    //   name: this.eventName,
-    //   phoneNumber: phone
-    // };
-    // // Send the phone number to the endpoint for posting an appointment.
-    // this._httpService.makeAppt(apptObj).subscribe(() => {
-    //   console.log('Successful POST request');
-    // }, error => {
-    //   console.error(error);
-    // }, () => {
-    //   console.log('Request complete');
-    // });
-  }
+
   toggleChat() {
     if (this.showChat === true) {
       this.showChat = false;
@@ -232,7 +202,6 @@ export class EviewComponent {
   }
   
   postMessage() {
-    console.log(this.form.get('handle'), this.form.get('name'));
     let messageToSend = {
       handle: this.form.value.handle,
       message: this.form.value.message,
@@ -240,11 +209,10 @@ export class EviewComponent {
     }
     this.messages.push(messageToSend);
       this._httpService.postMessage(messageToSend).subscribe(() => {
-      console.log('Successful POST request');
     }, error => {
       console.error(error);
     }, () => {
-      console.log('Request complete');
+      console.log('Message post complete');
     });
   }
   
