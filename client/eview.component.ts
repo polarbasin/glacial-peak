@@ -157,8 +157,48 @@ export class EviewComponent {
       this.onTestGet(this.id);
     }
   }
+  getDate(event) {
+    if (!event.eventDate) {
+      return;
+    }
+    const timeArray = event.eventDate.split('-');
+    const year = parseInt(timeArray[0]);
+    const month = parseInt(timeArray[1]);
+    const day = parseInt(timeArray[2]);
+    const eventDate = new Date(year, month - 1, day);
+    console.log(eventDate);
+    // const eventTimeMs = eventDate.valueOf();
+    // const currentTimeMs = Date.now();
+    // const timeUntilEvent = eventTimeMs - currentTimeMs;
+    // // 1 hour in ms is 3600000
+    // // system will notify user at 5PM day before event
+    // const timeUntilNotification = timeUntilEvent - (3600000 * 7);
+    // // if it is after 5PM day before event, immediately send notification
+    // if (timeUntilNotification < 0) {
+    //   sendNotification(event);
+    // } else {
+    //   //set to 5 PM day before event
+    //   setTimeout(sendNotification, timeUntilNotification, event);
+    // }
+    // console.log(`notification set for: ${timeUntilNotification / 3600000} hours from now`);
+  }
   newAppt() {
     console.log(this.appointment.get('phoneNumber').value);
+    console.log(this.getData);
+    console.log(this.getDate(this.getData));
+    // const phone = this.appointment.get('phoneNumber').value;
+    // const apptObj = {
+    //   name: this.eventName,
+    //   phoneNumber: phone
+    // };
+    // // Send the phone number to the endpoint for posting an appointment.
+    // this._httpService.makeAppt(apptObj).subscribe(() => {
+    //   console.log('Successful POST request');
+    // }, error => {
+    //   console.error(error);
+    // }, () => {
+    //   console.log('Request complete');
+    // });
   }
   toggleChat() {
     if (this.showChat === true) {
