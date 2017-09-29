@@ -1,6 +1,7 @@
 import { BrowserModule }           from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgModule }                from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent }            from './app.component';
 import { AppLayoutComponent }      from './app-layout.component';
 import { EventFormComponent }      from './event-form.component';
@@ -11,12 +12,18 @@ import { EviewComponent }          from './eview.component';
 import { APP_ROUTES_PROVIDER }     from './app.routes';
 import { ProfileComponent }        from './profile.component';
 import { ProfileButtonComponent }  from './profile-button.component';
+// import { FormGroup }               from '@angular/forms';
+// import { FormControl }             from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    FormsModule,
+    ReactiveFormsModule
+    // FormGroup,
+    // FormControl
   ],
   declarations: [ 
     AppComponent, 

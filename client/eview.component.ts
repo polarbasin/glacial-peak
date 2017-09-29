@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Headers, Http } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EvindService } from './evind.service';
 import { EventService } from './event.service';
+import { FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 // import { AttEvService } from './attendevent.service';
 
 // import { Http } from '@angular/http';
@@ -35,8 +38,11 @@ import { EventService } from './event.service';
       <div class="notification">
         <button (click)="notiForm()">Enable Notifications for this Event</button>
         <div id="notiForm" *ngIf="shownotiForm">
-        Enter the phone number for which you would like to receive SMS notifications:<br>
-        <input id="phonenumber" type="text" placeholder="Phone Number" /> <button id="phonesend">Submit</button>
+          <form [formGroup]="appointment" (ngSubmit)="newAppt(appointment.value)">
+            Enter the phone number for which you would like to receive SMS notifications:<br>
+            <input formControlName="phoneNumber" type="text" placeholder="Phone Number"/> 
+            <button type="submit">Submit</button>
+          </form>
         </div>
       </div>
       <button (click)="toggleChat()">{{showChatText}}</button>
@@ -77,18 +83,15 @@ export class EviewComponent {
   image: string;
   userID: string;
 
+  appointment = new FormGroup({
+    phoneNumber: new FormControl('phoneNumber')
+  });
+
   constructor(private route: ActivatedRoute, private _httpService: EvindService, public eventService: EventService) {
     this.id = route.snapshot.params['id'];
     this.showChatText = 'Go to event chat room';
     this.showChat = false;
     this.shownotiForm = false;
-    // this.eventName = this.getData.title;
-    // this.eventDate = 'Friday, September 29th, 2017 5:00PM';
-    // this.eventLocation = 'Operation Spark - 748 Camp St New Orleans, LA 70130';
-    // this.eventPict = 'https://i.imgur.com/2TBGE8r.jpg';
-    // this.eventLink = '';
-    // this.eventDesc = 'Team FuzzyLobster has been working all week to improve the nolaBored app, come see what they changed!';
-    // this.attending = ['Aaron', 'Jake', 'Violet'];
   }
   onTestGet(id) {
     this._httpService.getEvent(id).subscribe(data => {
@@ -128,7 +131,7 @@ export class EviewComponent {
       console.error(error);
     }, () => {
       console.log('complete');
-    })
+    });
   }
   handleAttend() {
     if (this.name) {
@@ -136,8 +139,9 @@ export class EviewComponent {
       this.onTestGet(this.id);
     }
   }
-
-
+  newAppt() {
+    console.log(this.appointment.get('phoneNumber').value);
+  }
   toggleChat() {
     if (this.showChat === true) {
       this.showChat = false;
