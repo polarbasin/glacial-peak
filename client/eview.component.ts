@@ -6,11 +6,6 @@ import { EvindService } from './evind.service';
 import { EventService } from './event.service';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-// import { AttEvService } from './attendevent.service';
-
-// import { Http } from '@angular/http';
-// import { EventService } from './event.service';
-// import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   selector: 'eview',
