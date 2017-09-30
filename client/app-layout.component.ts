@@ -10,7 +10,6 @@ import { EventService } from './event.service';
   `<div><login-button></login-button></div>
     <div><add-event-button></add-event-button></div>
     <div><profile-button></profile-button></div>
-    
     <div class="col-md-12" id="header"><h1>BORED<span class="question">?</span></h1>
     <h4 class="subtitle">A local event aggregator</h4>
   </div>

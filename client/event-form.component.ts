@@ -2,81 +2,90 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl} from '@angular/forms';
 import { EvindService } from './evind.service';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'event-form',
     providers: [EvindService],
     template: `
-      <form [formGroup]="form" (ngSubmit)="postEvent()" class="form-horizontal" action="/api/events" method="post">
-        <fieldset>
+    <div class="container">
+      <div class="row">
+       
+      </div>
+      <div class="row">
+        <form [formGroup]="form" (ngSubmit)="postEvent()" class="form-horizontal" action="/api/events" method="post">
+          <fieldset>
 
-        <!-- Form Name -->
-        <legend>Add your own event</legend>
+          <!-- Form Name -->
+          <legend>Add your own event</legend>
 
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="title">Event Name</label>  
-          <div class="col-md-5">
-          <input formControlName="title" id="title" name="title" type="text" placeholder="My event" class="form-control input-md">
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="title">Event Name</label>  
+            <div class="col-md-5">
+            <input formControlName="title" id="title" name="title" type="text" placeholder="My event" class="form-control input-md">
             
+            </div>
           </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="eventDate">Event Date</label>  
-          <div class="col-md-5">
-          <input formControlName="eventDate" id="eventDate" name="eventDate" type="date" placeholder="" class="form-control input-md">
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="eventDate">Event Date</label>  
+            <div class="col-md-5">
+            <input formControlName="eventDate" id="eventDate" name="eventDate" type="date" placeholder="" class="form-control input-md">
             
+            </div>
           </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="location">Event Location</label>  
-          <div class="col-md-5">
-          <input formControlName="location" id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="location">Event Location</label>  
+            <div class="col-md-5">
+            <input formControlName="location" id="location" name="location" type="text" placeholder="Location" class="form-control input-md">
             
+            </div>
           </div>
-        </div>
 
-        <!-- Textarea -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="description">Description</label>
-          <div class="col-md-3">                     
-            <textarea formControlName="description" class="form-control" id="description" placeholder="..." name="description"></textarea>
+          <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="description">Description</label>
+            <div class="col-md-3">                     
+              <textarea formControlName="description" class="form-control" id="description" placeholder="..." name="description"></textarea>
+            </div>
           </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="link">Event Link</label>  
-          <div class="col-md-5">
-          <input formControlName="link" id="link" name="link" type="text" placeholder="www.event.com" class="form-control input-md">
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="link">Event Link</label>  
+            <div class="col-md-5">
+            <input formControlName="link" id="link" name="link" type="text" placeholder="www.event.com" class="form-control input-md">
             
+            </div>
           </div>
-        </div>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="imgUrl">Image Link</label>  
-          <div class="col-md-5">
-          <input formControlName="imgUrl" id="imgUrl" name="imgUrl" type="text" placeholder="www.event.com/picture.jpg" class="form-control input-md">
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="imgUrl">Image Link</label>  
+            <div class="col-md-5">
+            <input formControlName="imgUrl" id="imgUrl" name="imgUrl" type="text" placeholder="www.event.com/picture.jpg" class="form-control input-md">
             
+            </div>
           </div>
-        </div>
 
 
-        <!-- Button -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="submit"></label>
-          <div class="col-md-4">
-            <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit</button>
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="submit"></label>
+            <div class="col-md-4">
+              <button id="submit" name="submit" type="submit" class="btn btn-primary">Submit</button>
+            </div>
           </div>
-        </div>
 
-        </fieldset>
-      </form>` 
+          </fieldset>
+       </form>
+        </div>
+      </div>  ` 
 })
 
 export class EventFormComponent {
