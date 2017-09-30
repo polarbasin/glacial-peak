@@ -86,8 +86,13 @@ app.route('/api/events')
   // .post(handlers.isAuthenticated, handlers.postEvent);
 
 app.get('/profileInfo', (req, res) => {
+  if (!req.user) {
+    res.status(404).send('not found');
+  } 
   res.send(req.user);
 });
+
+
 
 const port = process.env.PORT || 4657;
 
