@@ -10,7 +10,7 @@ h2{
     text-align: center;
     border-radius: 1px;
     z-index: 100;
-    position: absolute;
+    /* position: absolute; */
     -webkit-box-shadow: 0 10px 10px black;
     -moz-box-shadow: 0 10px 10px black;
     box-shadow: 0 10px 10px black;
@@ -65,3 +65,9 @@ h2{
     width: 20%; 
 }
 }
+
+/* .userinfo {
+  text-align: justify !important;
+  margin-bottom: 20px !important;
+  font-size: 3em !important;
+} */

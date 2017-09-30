@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
           );
         this.eventService.profile.subscribe(
             (profile)=> {
+                console.log(profile);
                 this.profile = profile;
                 this.name = profile.facebook.displayName;
                 this.image = profile.facebook.image;
