@@ -1,0 +1,28 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<!-- Latest compiled and minified CSS -->
+<div class="container">
+  <div class="row">
+    <div class="userinfo">
+      <img src={{image}} alt="Profile image example" />
+      <h2>{{name}}'s Events</h2>
+    </div>
+  </div>  
+
+
+  <div class="row">
+      <div class="container">
+        <div class="events">
+          <div class="row">
+            <div class="col-md-4" id="event" *ngFor="let event of events; let i = index" [hidden]="(!event.attending.includes(name))">
+              <div class="details">
+                <a target="_blank" href="{{event.link}}"><h3>{{ event.title }}</h3></a>
+                <img src="{{ event.imgUrl }}"><br>
+                <button><a [routerLink]="['/eview/', event._id]">View this Event</a></button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+     </div>
+  </div>
+</div>

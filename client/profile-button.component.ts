@@ -2,27 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from './event.service';
 
 @Component({
-  selector: 'login-button',
+  providers: [EventService],
+  selector: 'profile-button',
   template: `
-  <div [hidden]="loggedIn">
+  <div [hidden]="!loggedIn">
     <div class="login">
-      <a href="/login/facebook">
+      <a routerLink="/profile">
         <button class="login-submit">
-          Login with facebook
+          Profile Page
         </button>
       </a>
     </div>
   </div>
-   `
+  `
 })
 
-export class LoginButtonComponent implements OnInit {
-
+export class ProfileButtonComponent implements OnInit {
   loggedIn: any;
   profile: any;
 
-  constructor(private http: EventService) { }
+  constructor(private http: EventService) {
+    
 
+  }
+  
   ngOnInit() {
     console.log('nginit');
     this.http.profile.subscribe(response => {
@@ -34,6 +37,6 @@ export class LoginButtonComponent implements OnInit {
         this.loggedIn = true;
       }
     });
-
+    
   }
- }
+}

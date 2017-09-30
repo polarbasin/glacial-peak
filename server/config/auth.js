@@ -5,6 +5,6 @@ module.exports = {
     clientID: process.env.FB_APP_ID,
     clientSecret: process.env.FB_APP_SECRET,
     callbackURL: `${process.env.APP_URL}/auth/facebook/callback`,
-    profileFields: ['name', 'id', 'first_name', 'last_name', 'email']
+    profileFields: ['id', 'displayName', 'picture.type(large)', 'email']
   }
 };

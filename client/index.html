@@ -7,10 +7,20 @@
   </head>
   <!-- 3. Display the application -->
   <body>
-    <app>
-      <div><img src="styles/loading.gif" class="loadBar"></div>
-      <span class="loading">Loading...</span>
-    </app>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" id="header">
+          <h1>BORED<span class="question">?</span></h1>
+          <h4 class="subtitle">A local event aggregator</h4>
+        </div>
+      </div>
+      <div class="row">
+        <app>
+          <div><img src="styles/loading.gif" class="loadBar"></div>
+          <span class="loading">Loading...</span>
+        </app>
+      </div>
+    </div>
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
 
     <!-- Latest compiled and minified CSS -->
@@ -34,5 +44,7 @@
         console.error(err); 
       });
     </script>
+    <!-- 3. Add socket.io -->
+
   </body>
 </html>
