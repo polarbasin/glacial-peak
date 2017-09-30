@@ -1,11 +1,11 @@
-# NolaBored
+# BoredInNola
 
 
 ## Team
 
-  - __Product Owner__: Daniel Glaser
-  - __Scrum Master__: Harvey Sanders
-  - __Development Team Members__: Daniel Glaser, Harvey Sanders
+  - __Product Owner__: Violet Suber
+  - __Scrum Master__: Jake Pepple
+  - __Development Team Members__: Violet Suber, Aaron Matheney, Jake Pepple
 
 ## Table of Contents
 
@@ -37,9 +37,17 @@ From within the root directory:
 npm install
 ```
 
+### Build
+
+Compile and run server with:
+
+```
+npm start
+```
+
 ### Roadmap
 
-View the project roadmap [here](https://github.com/polarbasin/nolaBored/issues)
+View the project roadmap [here](https://github.com/fuzzylobster/nolaBored/issues)
 
 
 ## Contributing
