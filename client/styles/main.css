@@ -264,3 +264,8 @@ legend {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.test {
+  background: #000000;
+  padding: 10px;
+}
